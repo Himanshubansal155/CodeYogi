@@ -1,7 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import AuthenticationPage from "./pages/Authentication.page";
 import HomePage from "./pages/Home.page";
-import Lecture from "./pages/Lecture";
 
 function App() {
   return (
@@ -16,9 +15,6 @@ function App() {
           </Route>
           <Route path={["/dashboard", "/recordings"]}>
             <HomePage />
-          </Route>
-          <Route path="/batch/:batchNumber/lecture/:lectureNumber">
-            <Lecture />
           </Route>
         </Switch>
       </BrowserRouter>
