@@ -37,7 +37,7 @@ const Signup: FC<Props> = () => {
     },
   });
   return (
-    <div className="mx-auto font-nunito mt-12 max-w-sm">
+    <div className="mx-auto font-nunito mt-5 md:mt-12 max-w-sm">
       <h1 className="text-4xl tracking-wider text-black font-medium mb-5">
         Get started with a free account
       </h1>
@@ -110,7 +110,7 @@ const Signup: FC<Props> = () => {
             </div>
           </div>
 
-          <div className="flex justify-between mt-5">
+          <div className="flex justify-between mt-5 flex-col md:flex-row space-y-5 md:space-y-0">
             <div className="">
               <p className="inline-block">Show Password </p>
               <label className="cursor-pointer">

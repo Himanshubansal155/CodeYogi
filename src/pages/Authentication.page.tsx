@@ -17,7 +17,7 @@ const Authentication: FC<Props> = () => {
           <SignupPage />
         </Route>
       </Switch>
-      <AuthLogo />
+      <AuthLogo className="hidden md:block"/>
     </div>
   );
 };

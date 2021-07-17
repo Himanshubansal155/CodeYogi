@@ -37,7 +37,7 @@ const Login: FC<Props> = () => {
   });
 
   return (
-    <div className="mx-auto font-nunito mt-20 max-w-lg">
+    <div className="mx-auto font-nunito mt-5 md:mt-20 max-w-lg">
       <h1 className="text-4xl tracking-wider text-black font-medium mb-5">
         Log In to <span className="text-blue-600 font-semibold">CORK</span>
       </h1>
@@ -83,7 +83,7 @@ const Login: FC<Props> = () => {
             {touched.password && errors.password}
           </div>
 
-          <div className="flex justify-between mt-5">
+          <div className="flex justify-between mt-5 flex-col md:flex-row space-y-5 md:space-y-0">
             <div className="">
               <p className="inline-block">Show Password </p>
               <label className="cursor-pointer">
