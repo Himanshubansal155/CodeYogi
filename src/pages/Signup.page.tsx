@@ -4,8 +4,8 @@ import { FaAt, FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { FiLock, FiUser } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
 import AuthFooter from "../components/AuthFooter";
-import Button from "../components/Button";
-import Input from "../components/Input";
+import Button from "../components/Button/Button";
+import Input from "../components/Input/Input";
 import * as yup from "yup";
 import { useState } from "react";
 
@@ -53,49 +53,41 @@ const Signup: FC<Props> = () => {
       <form className="text-left mt-12" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true"></input>
         <div className="">
-          <div className="border-b-2 border-solid border-gray-200 w-96 flex items-center">
-            <FiUser className="w-6 h-6 text-blue-400 inline" />
             <Input
               PlaceHolder="Email Address"
               id="email"
               type="email"
+              Icon={FiUser}
               required
               autoComplete="email"
+              touched={touched.email}
+              error={errors.email}
               {...getFieldProps("email")}
             />
-          </div>
-          <div className="text-red-500 h-6">
-            {touched.email && errors.email}
-          </div>
-          <div className="border-b-2 border-solid border-gray-200 w-96 flex items-center">
-            <FaAt className="w-6 h-6 text-blue-400 inline" />
+
             <Input
               PlaceHolder="Phone Number"
               id="phone"
               type="tel"
+              Icon={FaAt}
               required
               autoComplete=""
+              touched={touched.phoneNumber}
+              error={errors.phoneNumber}
               {...getFieldProps("phoneNumber")}
             />
-          </div>
-          <div className="text-red-500 h-6">
-            {touched.phoneNumber && errors.phoneNumber}
-          </div>
 
-          <div className="border-b-2 border-solid border-gray-200 w-96 flex items-center focus:border-blue-600">
-            <FiLock className="w-6 h-6 text-blue-400 inline" />
             <Input
               PlaceHolder="Password"
               id="password"
               type={passwordHidden ? "password" : "text"}
+              Icon={FiLock}
               required
               autoComplete="current-password"
+              touched={touched.password}
+              error={errors.password}
               {...getFieldProps("password")}
             />
-          </div>
-          <div className="text-red-500 h-6">
-            {touched.password && errors.password}
-          </div>
 
           <div className="mt-2">
             <div className="text-gray-500 font-normal">

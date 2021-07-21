@@ -5,8 +5,8 @@ import { FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import Input from "../components/Input/Input";
+import Button from "../components/Button/Button";
 import AuthFooter from "../components/AuthFooter";
 
 interface Props {}
@@ -53,35 +53,29 @@ const Login: FC<Props> = () => {
       <form className="text-left mt-12" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true"></input>
         <div className="">
-          <div className="border-b-2 border-solid border-gray-200 w-96 flex items-center">
-            <FiUser className="w-6 h-6 text-blue-400 inline" />
-            <Input
-              PlaceHolder="Email Address"
-              id="email"
-              type="email"
-              required
-              autoComplete="email"
-              {...getFieldProps("email")}
-            />
-          </div>
-          <div className="text-red-500 h-6">
-            {touched.email && errors.email}
-          </div>
+          <Input
+            PlaceHolder="Email Address"
+            id="email"
+            type="email"
+            Icon={FiUser}
+            required
+            autoComplete="email"
+            touched={touched.email}
+            error={errors.email}
+            {...getFieldProps("email")}
+          />
 
-          <div className="border-b-2 border-solid border-gray-200 w-96 mt-5 flex items-center focus:border-blue-600">
-            <FiLock className="w-6 h-6 text-blue-400 inline" />
-            <Input
-              PlaceHolder="Password"
-              id="password"
-              type={passwordHidden ? "password" : "text"}
-              required
-              autoComplete="current-password"
-              {...getFieldProps("password")}
-            />
-          </div>
-          <div className="text-red-500 h-6">
-            {touched.password && errors.password}
-          </div>
+          <Input
+            PlaceHolder="Password"
+            id="password"
+            type={passwordHidden ? "password" : "text"}
+            Icon={FiLock}
+            required
+            autoComplete="current-password"
+            touched={touched.password}
+            error={errors.password}
+            {...getFieldProps("password")}
+          />
 
           <div className="flex justify-between mt-5 flex-col md:flex-row space-y-5 md:space-y-0">
             <div className="">
