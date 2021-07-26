@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
 import AuthFooter from "../components/AuthFooter";
+import { login } from "../Api";
 
 interface Props {}
 
@@ -29,10 +30,12 @@ const Login: FC<Props> = () => {
     }),
     onSubmit: (data) => {
       setSubmitting(true);
-      setTimeout(() => {
-        console.log(data);
-        history.push("/dashboard");
-      }, 3000);
+      login(data).then(()=>{
+          history.push("/dashboard");
+      });
+      // setTimeout(() => {
+      //   console.log(data);
+      // }, 3000);
     },
   });
 
@@ -62,6 +65,7 @@ const Login: FC<Props> = () => {
             autoComplete="email"
             touched={touched.email}
             error={errors.email}
+            errorBorder={touched.email && errors.email ? "border-red-400" : ""}
             {...getFieldProps("email")}
           />
 
@@ -74,6 +78,9 @@ const Login: FC<Props> = () => {
             autoComplete="current-password"
             touched={touched.password}
             error={errors.password}
+            errorBorder={
+              touched.password && errors.password ? "border-red-400" : ""
+            }
             {...getFieldProps("password")}
           />
 

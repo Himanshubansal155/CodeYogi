@@ -8,7 +8,7 @@ interface Props {}
 const Home: FC<Props> = () => {
     return (
         <div className="flex flex-row">
-            <Sidebar />
+            <Sidebar className="hidden md:block"/>
             <Switch>
                 <Route path="/dashboard">
                     <DashboardPage />

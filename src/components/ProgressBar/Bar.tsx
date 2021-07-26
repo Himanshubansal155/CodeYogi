@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Bar: FC<Props> = ({ theme, width, className }) => {
-    const themeColor = theme === "primary"? "bg-blue-600":(theme === "success"?"bg-green-600":"bg-gray-600");
+    const themeColor = theme === "primary"? "bg-blue-600":(theme === "success"?"bg-green-600":"bg-gray-600 text-white");
   
   return (
     <div className="bg-gray-100 rounded-3xl">

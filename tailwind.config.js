@@ -23,5 +23,7 @@ module.exports = {
       borderColor: ['checked'],},
       animation: ['hover'],
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

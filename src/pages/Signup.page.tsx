@@ -14,6 +14,7 @@ interface Props {}
 const Signup: FC<Props> = () => {
   const history = useHistory();
   const [passwordHidden, setPasswordHidden] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const {
     handleSubmit,
     touched,
@@ -42,7 +43,7 @@ const Signup: FC<Props> = () => {
         Get started with a free account
       </h1>
       <p className=" font-bold">
-        Already have an account? {" "}
+        Already have an account?{" "}
         <Link
           to="/"
           className="text-blue-600 border-b-2 border-solid border-blue-600"
@@ -53,41 +54,48 @@ const Signup: FC<Props> = () => {
       <form className="text-left mt-12" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true"></input>
         <div className="">
-            <Input
-              PlaceHolder="Email Address"
-              id="email"
-              type="email"
-              Icon={FiUser}
-              required
-              autoComplete="email"
-              touched={touched.email}
-              error={errors.email}
-              {...getFieldProps("email")}
-            />
+          <Input
+            PlaceHolder="Email Address"
+            id="email"
+            type="email"
+            Icon={FiUser}
+            required
+            autoComplete="email"
+            touched={touched.email}
+            error={errors.email}
+            errorBorder={touched.email && errors.email ? "border-red-400" : ""}
+            {...getFieldProps("email")}
+          />
 
-            <Input
-              PlaceHolder="Phone Number"
-              id="phone"
-              type="tel"
-              Icon={FaAt}
-              required
-              autoComplete=""
-              touched={touched.phoneNumber}
-              error={errors.phoneNumber}
-              {...getFieldProps("phoneNumber")}
-            />
+          <Input
+            PlaceHolder="Phone Number"
+            id="phone"
+            type="tel"
+            Icon={FaAt}
+            required
+            autoComplete=""
+            touched={touched.phoneNumber}
+            error={errors.phoneNumber}
+            errorBorder={
+              touched.phoneNumber && errors.phoneNumber ? "border-red-400" : ""
+            }
+            {...getFieldProps("phoneNumber")}
+          />
 
-            <Input
-              PlaceHolder="Password"
-              id="password"
-              type={passwordHidden ? "password" : "text"}
-              Icon={FiLock}
-              required
-              autoComplete="current-password"
-              touched={touched.password}
-              error={errors.password}
-              {...getFieldProps("password")}
-            />
+          <Input
+            PlaceHolder="Password"
+            id="password"
+            type={passwordHidden ? "password" : "text"}
+            Icon={FiLock}
+            required
+            autoComplete="current-password"
+            touched={touched.password}
+            error={errors.password}
+            errorBorder={
+              touched.password && errors.password ? "border-red-400" : ""
+            }
+            {...getFieldProps("password")}
+          />
 
           <div className="mt-2">
             <div className="text-gray-500 font-normal">
@@ -95,6 +103,7 @@ const Signup: FC<Props> = () => {
                 <input
                   type="checkbox"
                   className="text-blue-400 border-2 w-4 h-4"
+                  onClick={()=>setIsChecked((open)=>!open)}
                 />
                 <span className="px-1"></span>I agree to the{" "}
                 <span className="text-blue-400">terms and conditions</span>
@@ -127,7 +136,7 @@ const Signup: FC<Props> = () => {
                 type="submit"
                 className={
                   "opacity-50 " +
-                  (!touched.email || errors.email || errors.password
+                  (!touched.email || errors.email || errors.password || errors.phoneNumber || !isChecked
                     ? ""
                     : "opacity-100")
                 }

@@ -26,18 +26,18 @@ const Button: FC<Props> = ({
   if (outline === "outline") {
     themeColor =
       theme === "primary"
-        ? "border-2 border-blue-600 text-blue-600"
+        ? "border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-2xl"
         : theme === "success"
-        ? "border-2 border-green-600 text-green-600"
+        ? "border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white hover:shadow-2xl"
         : theme === "Error"
-        ? "border-2 border-gray-600 text-gray-600"
+        ? "border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white hover:shadow-2xl"
         : "";
   }
   return (
     <button
       {...rest}
       className={
-        "shadow-2xl p-2 px-5 rounded-md " +
+        "shadow-2xl p-2 px-5 rounded-md ease-in-out duration-300 " +
         className +
         " " +
         themeColor

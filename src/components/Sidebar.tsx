@@ -1,11 +1,22 @@
-import {FC, memo} from "react";
+import { FC, memo } from "react";
+import { logout } from "../Api";
 
-interface Props {}
+interface Props {
+  className:string,
+}
 
-const Sidebar: FC<Props> = () => {
+const Sidebar: FC<Props> = ({className}) => {
   return (
-    <div className="h-screen w-80 bg-indigo-200">
-        sidebar
+    <div className={"h-screen w-80 bg-indigo-200 " + className}>
+      sidebar
+      <button
+        onClick={() => {
+          logout();
+          window.location.href = "/login";
+        }}
+      >
+        LogOut
+      </button>
     </div>
   );
 };
