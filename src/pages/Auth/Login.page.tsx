@@ -5,10 +5,10 @@ import { FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import Input from "../components/Input/Input";
-import Button from "../components/Button/Button";
-import AuthFooter from "../components/AuthFooter";
-import { login } from "../Api";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import AuthFooter from "../../components/AuthFooter";
+import { login } from "../../api/Auth";
 
 interface Props {}
 

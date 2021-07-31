@@ -1,22 +1,17 @@
 import { FC, memo, useEffect, useState } from "react";
-import { fetchGroups } from "../Api";
+import { fetchGroups } from "../../api/groups";
+import { Group } from "../../models/Group";
 
 interface Props {}
 
 const Dashboard: FC<Props> = () => {
-  const [people, setPeople] = useState<User[]>();
+  const [people, setPeople] = useState<Group[]>();
   const [query, setQuery] = useState("");
-
-  interface User {
-    name: string;
-    group_image_url: string;
-    description: string;
-  }
 
   useEffect(() => {
     fetchGroups({ status: "all-groups", query }).then((groupDetails) => {
       let index = 0;
-      let arr: User[] = [];
+      let arr: Group[] = [];
 
       groupDetails.forEach((person) => {
         arr[index] = person;
@@ -29,7 +24,7 @@ const Dashboard: FC<Props> = () => {
 
 
   return (
-    <div>
+    <div className="ml-80 mt-12">
       This is Dashboard Page
       <div className="mt-1 relative rounded-md shadow-sm w-64 ml-28">
         <input

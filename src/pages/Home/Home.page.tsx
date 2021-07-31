@@ -1,6 +1,8 @@
 import {FC, memo} from "react";
 import { Route, Switch } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Header from "../../components/Header/Header";
+import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../../components/Sidebar";
 import DashboardPage from "./Dashboard.page";
 import RecordingsPage from "./Recordings.page";
 interface Props {}
@@ -8,6 +10,8 @@ interface Props {}
 const Home: FC<Props> = () => {
     return (
         <div className="flex flex-row">
+            <Navbar />
+            <Header />
             <Sidebar className="hidden md:block"/>
             <Switch>
                 <Route path="/dashboard">

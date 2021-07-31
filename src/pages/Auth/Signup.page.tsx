@@ -3,9 +3,9 @@ import { FC, memo } from "react";
 import { FaAt, FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { FiLock, FiUser } from "react-icons/fi";
 import { Link, useHistory } from "react-router-dom";
-import AuthFooter from "../components/AuthFooter";
-import Button from "../components/Button/Button";
-import Input from "../components/Input/Input";
+import AuthFooter from "../../components/AuthFooter";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
 import * as yup from "yup";
 import { useState } from "react";
 

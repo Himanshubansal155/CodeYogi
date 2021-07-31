@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
-import AuthLogo from "../components/AuthLogo";
+import AuthLogo from "../../components/AuthLogo";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 
