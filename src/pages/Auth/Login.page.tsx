@@ -9,10 +9,13 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import AuthFooter from "../../components/AuthFooter";
 import { login } from "../../api/Auth";
+import { User } from "../../models/User";
 
-interface Props {}
+interface Props {
+  onLogin: (user:User) => void;
+}
 
-const Login: FC<Props> = () => {
+const Login: FC<Props> = ({onLogin}) => {
   const history = useHistory();
   const [passwordHidden, setPasswordHidden] = useState(true);
   const {
@@ -30,12 +33,10 @@ const Login: FC<Props> = () => {
     }),
     onSubmit: (data) => {
       setSubmitting(true);
-      login(data).then(()=>{
+      login(data).then((user)=>{
+        onLogin(user);
           history.push("/dashboard");
       });
-      // setTimeout(() => {
-      //   console.log(data);
-      // }, 3000);
     },
   });
 

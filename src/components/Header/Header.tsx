@@ -12,7 +12,7 @@ const header: FC<Props> = () => {
         <span className="text-lg ml-6 text-gray-500">Dashboard / Sales</span>
         </div>
         <div>
-            <Button outline="outline" className="border-gray-200 border-2 text-gray-900">Settings</Button>
+            <Button outline="outline" theme="Error" className="border-gray-200 border-2 border-opacity-50 focus:bg-opacity-50">Settings</Button>
         </div>
     </div>
   );

@@ -30,3 +30,11 @@ export const logout = () => {
   localStorage.removeItem(LS_LOGIN_TOKEN);
 };
 
+interface MeResponse {
+  data:User;
+}
+
+export const me = () => {
+  const url = BASE_URL + "/me";
+  return axios.get<MeResponse>(url).then((response) => response.data.data);
+}
