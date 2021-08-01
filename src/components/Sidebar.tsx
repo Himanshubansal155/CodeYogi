@@ -1,17 +1,18 @@
+import { useContext } from "react";
 import { FC, memo } from "react";
 import { logout } from "../api/Auth";
-import { User } from "../models/User";
+import AppContext from "../pages/App.context";
 
 interface Props {
   className:string,
-  user:User;
 }
 
 const Sidebar: FC<Props> = (props) => {
+  const {user} = useContext(AppContext);
   return (
     <div className={"h-screen w-80 bg-indigo-200 fixed left-0 top-28 " + props.className}>
       sidebar
-      {props.user.first_name}
+      {user!.first_name}
       <br></br>
       <button className="p-2 bg-blue-700"
         onClick={() => {

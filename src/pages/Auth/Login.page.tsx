@@ -1,4 +1,4 @@
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiUser, FiLock } from "react-icons/fi";
 import { FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
@@ -9,13 +9,14 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import AuthFooter from "../../components/AuthFooter";
 import { login } from "../../api/Auth";
-import { User } from "../../models/User";
+import AppContext from "../App.context";
+import { useContext } from "react";
 
 interface Props {
-  onLogin: (user:User) => void;
 }
 
-const Login: FC<Props> = ({onLogin}) => {
+const Login: FC<Props> = () => {
+  const {setUser} = useContext(AppContext);
   const history = useHistory();
   const [passwordHidden, setPasswordHidden] = useState(true);
   const {
@@ -34,7 +35,7 @@ const Login: FC<Props> = ({onLogin}) => {
     onSubmit: (data) => {
       setSubmitting(true);
       login(data).then((user)=>{
-        onLogin(user);
+        setUser(user);
           history.push("/dashboard");
       });
     },
