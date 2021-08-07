@@ -1,4 +1,3 @@
-import React from "react";
 import profile from "../../images/profile-12.jpeg";
 
 import Avatar from "./Avatar";

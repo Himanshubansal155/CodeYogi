@@ -135,9 +135,9 @@ const Signup: FC<Props> = () => {
               <Button
                 type="submit"
                 className={
-                  "opacity-50 " +
+                  "px-5 opacity-50 " +
                   (!touched.email || errors.email || errors.password || errors.phoneNumber || !isChecked
-                    ? ""
+                    ? " cursor-not-allowed"
                     : "opacity-100")
                 }
               >

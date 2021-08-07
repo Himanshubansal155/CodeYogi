@@ -4,7 +4,6 @@ import { FC, memo } from "react";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: "primary" | "success" | "Error" | "undefined";
   className?: string;
-  children: string;
   outline?: "outline" | "none";
 }
 
@@ -37,7 +36,7 @@ const Button: FC<Props> = ({
     <button
       {...rest}
       className={
-        "shadow-2xl p-2 px-5 rounded-md ease-in-out duration-300 " +
+        "shadow-2xl p-1 rounded-md ease-in-out duration-300 " +
         className +
         " " +
         themeColor

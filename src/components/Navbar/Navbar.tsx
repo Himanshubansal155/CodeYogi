@@ -1,12 +1,14 @@
-import { FC, memo } from "react";
+import { FC, memo, useState } from "react";
 import logo from "../../images/logo.svg";
 import { FiBell, FiMail, FiSearch } from "react-icons/fi";
 import profile from "../../images/profile-12.jpeg";
 import ca from "../../images/ca.png";
+import DropDown from "./DropDown";
 
 interface Props {}
 
 const Navbar: FC<Props> = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="fixed top-0 bg-gray-800 w-full z-10 text-white flex justify-between py-2">
       <div className="flex h-full items-center">
@@ -41,8 +43,9 @@ const Navbar: FC<Props> = () => {
           <div className="absolute bg-green-500 rounded-full h-1.5 w-1.5 -right-0.5 -top-1"></div>
           <FiBell className="text-xl text-gray-200" />
         </div>
-        <div className="cursor-pointer" onClick={() => console.log("clicked")}>
+        <div className="cursor-pointer" onClick={() => setIsOpen((open) => !open)}>
           <img src={profile} alt="profile" className="h-7 rounded-md"></img>
+          <DropDown open={isOpen} onClose={setIsOpen} />
         </div>
       </div>
     </div>

@@ -9,14 +9,11 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import AuthFooter from "../../components/AuthFooter";
 import { login } from "../../api/Auth";
-import AppContext from "../App.context";
-import { useContext } from "react";
+import { authAction } from "../../actions/auth.actions";
 
-interface Props {
-}
+interface Props {}
 
 const Login: FC<Props> = () => {
-  const {setUser} = useContext(AppContext);
   const history = useHistory();
   const [passwordHidden, setPasswordHidden] = useState(true);
   const {
@@ -34,9 +31,9 @@ const Login: FC<Props> = () => {
     }),
     onSubmit: (data) => {
       setSubmitting(true);
-      login(data).then((user)=>{
-        setUser(user);
-          history.push("/dashboard");
+      login(data).then((user) => {
+        authAction.login(user);
+        history.push("/dashboard");
       });
     },
   });
@@ -110,10 +107,10 @@ const Login: FC<Props> = () => {
               <Button
                 type="submit"
                 className={
-                  "opacity-50 " +
+                  "px-5 opacity-50 " +
                   (!touched.email || errors.email || errors.password
-                    ? ""
-                    : "opacity-100")
+                    ? "cursor-not-allowed "
+                    : "opacity-100 cursor-pointer")
                 }
               >
                 Log In

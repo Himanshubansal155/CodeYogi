@@ -18,11 +18,11 @@ export const Main = (args: any) => <Button {...args} />;
 
 Main.args = {
   children: "button",
-  className: "hover:shadow-none",
+  className: "hover:shadow-none px-5",
 };
 
 export const Outline = (args: any) => (
-  <Button {...args} className="shadow-none"/>
+  <Button {...args} className="shadow-none px-5"/>
 );
 
 Outline.args = {
