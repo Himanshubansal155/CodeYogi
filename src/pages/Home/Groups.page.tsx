@@ -14,8 +14,6 @@ const Groups: FC<Props> = () => {
 
   useEffect(() => {
     fetchGroups({ status: "all-groups", query }).then((groups) => {
-      console.log(groups);
-      
       groupActions.groupQueryCompleted(query, groups);
     });
   }, [query]);
