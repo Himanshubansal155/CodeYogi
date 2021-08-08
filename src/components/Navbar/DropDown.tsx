@@ -38,7 +38,7 @@ const DropDown: FC<Props> = ({ open: isOpen, onClose: setIsOpen }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed top-12 bg-white p-3 rounded shadow-md right-5 z-20 text-gray-500 text-left">
+          <div className="fixed top-12 bg-white p-3 rounded shadow-md right-5 z-50 text-gray-500 text-left">
             <Button
               className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600"
               onClick={() => history.push("/profile")}

@@ -2,12 +2,14 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { combineReducers, createStore } from "redux";
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/group.reducer";
+import { sidebarReducer } from "./reducers/sidebar.reducer";
 import { userReducer } from "./reducers/user.reducer";
 
 const reducer = combineReducers({
   users: userReducer,
   auth: authReducer,
   groups: groupReducer,
+  sidebar: sidebarReducer,
 });
 
 export const store = createStore(

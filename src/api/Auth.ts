@@ -17,7 +17,6 @@ interface LoginResponse {
   user: User;
 }
 
-
 export const login = (data: LoginFields) => {
   const url = BASE_URL + "/login";
   return axios.post<LoginResponse>(url, data).then((response) => {
@@ -31,10 +30,27 @@ export const logout = () => {
 };
 
 interface MeResponse {
-  data:User;
+  data: User;
 }
 
 export const me = () => {
   const url = BASE_URL + "/me";
   return axios.get<MeResponse>(url).then((response) => response.data.data);
+};
+
+interface MeChangeResponse {
+  first_name?: string;
+  middle_name?: string;
+  last_name?: string;
+  email?: string;
+  profile_pic_url?: string;
 }
+
+export const meChange = (data: MeChangeResponse) => {
+  const token = localStorage.getItem(LS_LOGIN_TOKEN);
+  const url = BASE_URL + "/me";
+  return axios.put(url, {
+    body: data,
+    headers: { Authorization: token, "content-type": "application/json" },
+  }).then((response) => response.data);
+};
