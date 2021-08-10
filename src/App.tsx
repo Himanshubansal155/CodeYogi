@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { authAction } from "./actions/auth.actions";
-import { LS_LOGIN_TOKEN, me } from "./api/Auth";
+import { LS_LOGIN_TOKEN } from "./api/Auth";
+import { me } from "./middleware/auth.middleware";
 import AuthenticationPageLazy from "./pages/Auth/Authentication.page.lazy";
 import HomePageLazy from "./pages/Home/Home.page.lazy";
 import NotFoundPage from "./pages/NotFound.page";
@@ -18,7 +18,7 @@ function App() {
     if (!token) {
       return;
     }
-    me().then((u) => authAction.fetch(u));
+    me();
   }, []); // eslint-disable-line
 
   if (token && !user) {

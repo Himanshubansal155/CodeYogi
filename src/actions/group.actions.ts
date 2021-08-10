@@ -3,7 +3,7 @@ import { Group } from "../models/Group";
 import { store } from "../store";
 import { GROUP_QUERY, GROUP_QUERY_COMPLETED, SELECTED_ID_QUERY } from "./actions.constants";
 
-export const groupQueryAction = (query: string) => ({type: GROUP_QUERY, payload: query});
+export const groupQueryAction = (query: string, loading:boolean) => ({type: GROUP_QUERY, payload: {query, loading}});
 export const groupQueryCompleted = (query:string, groups: Group[]) => ({type: GROUP_QUERY_COMPLETED, payload: {query, groups}});
 export const groupSelectedIdAction = (selected: number) => ({type: SELECTED_ID_QUERY, payload: selected});
 

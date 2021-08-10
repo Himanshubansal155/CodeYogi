@@ -1,9 +1,11 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
+import { FaSpinner } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { groupActions } from "../../actions/group.actions";
-import { fetchGroups } from "../../api/groups";
 import HomeLayout from "../../components/HomeLayout";
+import { fetchGroups } from "../../middleware/groups.middleware";
 import {
+  groupLoadingSelector,
   groupQuerySelector,
   groupSelector,
 } from "../../selectors/groups.selectors";
@@ -17,17 +19,13 @@ const Groups: FC<Props> = () => {
   const query = useAppSelector(groupQuerySelector);
   const groups = useAppSelector(groupSelector);
   const toggle = useAppSelector(SidebarSelector);
-
-  useEffect(() => {
-    fetchGroups({ status: "all-groups", query }).then((groups) => {
-      groupActions.groupQueryCompleted(query, groups);
-    });
-  }, [query]);
+  const loading = useAppSelector(groupLoadingSelector);
   return (
     <HomeLayout toggle={toggle.isSidebarOpen} className="text-center">
       <>
         This is Groups Page
-        <div className="mt-1 relative rounded-md shadow-sm w-64 mx-auto">
+        <div
+         className="mt-1 relative rounded-md shadow-sm w-64 mx-auto">
           <input
             type="text"
             name="search"
@@ -35,8 +33,12 @@ const Groups: FC<Props> = () => {
             className="focus:ring-indigo-500 focus:border-indigo-500 w-full px-5 py-1 sm:text-sm border-gray-300 rounded-md"
             placeholder="Search"
             value={query}
-            onChange={(e) => groupActions.groupQueryAction(e.target.value)}
+            onChange={(e) => fetchGroups({query: e.target.value, status: "all-groups"})}
           />
+          
+        </div>
+        <div className="h-5">
+          {loading && <FaSpinner className="h-5 w-5 animate-spin mx-auto" />}
         </div>
         <div className="w-96 divide-y divide-gray-200 text-left mt-10 mx-auto table-auto rounded-t-md">
           <h1 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100">
@@ -45,7 +47,7 @@ const Groups: FC<Props> = () => {
 
           {groups &&
             groups.map((group) => (
-              <div className="w-96 mx-auto bg-white flex items-center p-4" onClick={() => {
+              <div className="w-96 mx-auto bg-white flex items-center p-4" key={group.id +""} onClick={() => {
                 groupActions.groupSelectedIdAction(group.id);
                 history.push("/group");
               }}>

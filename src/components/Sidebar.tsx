@@ -30,7 +30,7 @@ const Sidebar: FC<Props> = (props) => {
       >
         <div
           className={
-            "h-screen w-60 border-r-2 border-gray-300 z-30 bg-gray-200 fixed left-0 pb-28 top-24 mt-2 p-4 flex flex-col space-y-2 overflow-y-scroll " +
+            "h-screen w-60 border-r-2 border-gray-300 z-30 bg-gray-200 fixed ease-linear duration-1000 left-0 pb-28 top-24 mt-2 p-4 flex flex-col space-y-2 overflow-y-scroll " +
             props.className
           }
         >
@@ -50,6 +50,7 @@ const Sidebar: FC<Props> = (props) => {
             StartIcon={icons.FiBox}
             EndIcon={icons.FiChevronRight}
             children="Components"
+            onClick={() => history.push("/recordings")}
           />
           <SideBarComponent
             StartIcon={icons.FiZap}
