@@ -1,9 +1,12 @@
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/group.reducer";
 import { sidebarReducer } from "./reducers/sidebar.reducer";
 import { userReducer } from "./reducers/user.reducer";
+import { sagaMiddleware } from "./saga";
+import rootSaga from "./saga/groups.saga";
 
 const reducer = combineReducers({
   users: userReducer,
@@ -14,8 +17,11 @@ const reducer = combineReducers({
 
 export const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
+
+sagaMiddleware.run(rootSaga);
+
 export type AppState = ReturnType<typeof store.getState>;
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

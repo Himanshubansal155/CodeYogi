@@ -11,7 +11,7 @@ const HomeLayout: FC<Props> = ({ toggle, children, className }) => {
     <div
       className={
         className +
-        " pt-16 p-4 relative w-full mt-16 bg-gray-200 ease-linear duration-1000 min-h-screen " +
+        " pt-16 p-4 relative w-full mt-16 ease-linear duration-1000 min-h-screen " +
         (toggle && " md:ml-60")
       }
     >

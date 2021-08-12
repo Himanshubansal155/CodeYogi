@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { authAction } from "./actions/auth.actions";
 import { LS_LOGIN_TOKEN } from "./api/Auth";
-import { me } from "./middleware/auth.middleware";
+import { me } from "./api/Auth";
 import AuthenticationPageLazy from "./pages/Auth/Authentication.page.lazy";
 import HomePageLazy from "./pages/Home/Home.page.lazy";
 import NotFoundPage from "./pages/NotFound.page";
@@ -18,7 +19,7 @@ function App() {
     if (!token) {
       return;
     }
-    me();
+    me().then(u => authAction.fetch(u));
   }, []); // eslint-disable-line
 
   if (token && !user) {
@@ -41,7 +42,7 @@ function App() {
                 "/recordings",
                 "/profile",
                 "/groups",
-                "/group",
+                "/group/:groupId",
               ]}
               exact
             >

@@ -11,18 +11,17 @@ import GroupPage from "./Group.page";
 interface Props {}
 
 const Home: FC<Props> = (props) => {
-  
   return (
     <div className="flex flex-row">
       <Navbar />
       <Sidebar />
       <Switch>
         <Route path="/dashboard">
-          <Header pageName="Dashboard" componentName="Sales"/>
+          <Header pageName="Dashboard" componentName="Sales" />
           <DashboardPage />
         </Route>
         <Route path="/recordings">
-          <Header pageName="Dashboard" componentName="Recordings"/>
+          <Header pageName="Dashboard" componentName="Recordings" />
           <RecordingsPage />
         </Route>
         <Route path="/profile">
@@ -33,7 +32,7 @@ const Home: FC<Props> = (props) => {
           <Header pageName="User" componentName="Groups" />
           <Groups />
         </Route>
-        <Route path="/group">
+        <Route path="/group/:groupId">
           <Header pageName="Groups" componentName="Group" />
           <GroupPage />
         </Route>
