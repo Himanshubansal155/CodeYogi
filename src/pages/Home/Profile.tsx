@@ -1,7 +1,9 @@
 import { FC, memo } from "react";
+import { authAction } from "../../actions/auth.actions";
 import { meChange } from "../../api/Auth";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
+import { User } from "../../models/User";
 import { meSelector } from "../../selectors/auth.selectors";
 import { SidebarSelector } from "../../selectors/sidebar.selectors";
 import { useAppSelector } from "../../store";
@@ -10,9 +12,16 @@ interface Props {}
 
 const Profile: FC<Props> = () => {
   let user = useAppSelector(meSelector);
+  let user1: User = user;
   const toggle = useAppSelector(SidebarSelector);
+
   return (
-    <div className={"pt-16 p-4 relative w-full mt-16 bg-blue-900 bg-opacity-10 ease-linear duration-1000 min-h-screen " + (toggle.isSidebarOpen && " md:ml-60")}>
+    <div
+      className={
+        "pt-16 p-4 relative w-full mt-16 bg-blue-900 bg-opacity-10 ease-linear duration-1000 min-h-screen " +
+        (toggle.isSidebarOpen && " md:ml-60")
+      }
+    >
       <div className="w-full min-h-0 rounded-lg shadow-sm bg-white p-5">
         <h1 className="uppercase text-lg">General Information</h1>
         <div className="flex flex-col md:flex-row md:h-44 m-10">
@@ -39,6 +48,9 @@ const Profile: FC<Props> = () => {
                   error=""
                   errorBorder="border-opacity-0 w-full"
                   defaultValue={user.first_name}
+                  onChange={(e) => {
+                    user1.first_name = e.target.value;
+                  }}
                 />
               </div>
               <div className="flex flex-col w-full md:w-1/3 mr-5">
@@ -54,6 +66,9 @@ const Profile: FC<Props> = () => {
                   error=""
                   errorBorder="border-opacity-0 w-full"
                   defaultValue={user.middle_name}
+                  onChange={(e) => {
+                    user1.middle_name = e.target.value;
+                  }}
                 />
               </div>
               <div className="flex flex-col w-full md:w-1/3 mr-10">
@@ -69,6 +84,9 @@ const Profile: FC<Props> = () => {
                   error=""
                   errorBorder="border-opacity-0 w-full"
                   defaultValue={user.last_name}
+                  onChange={(e) => {
+                    user1.last_name = e.target.value;
+                  }}
                 />
               </div>
             </div>
@@ -85,6 +103,9 @@ const Profile: FC<Props> = () => {
                 error=""
                 errorBorder="border-opacity-0 w-full"
                 defaultValue={user.email}
+                onChange={(e) => {
+                  user1.email = e.target.value;
+                }}
               />
             </div>
           </div>
@@ -95,13 +116,14 @@ const Profile: FC<Props> = () => {
         <div className="p-8">
           <div className="flex flex-col w-full mr-5">
             <label htmlFor="bio" className="text-gray-400 text-base">
-              Bio
+              Bio (unchangeable)
             </label>
             <textarea
               id="bio"
               placeholder="Tell me About Yourself..."
               className="border-2 border-gray-200 rounded-md p-2 w-full"
               defaultValue={user.bio}
+              readOnly
               rows={5}
             ></textarea>
           </div>
@@ -124,11 +146,17 @@ const Profile: FC<Props> = () => {
                 error=""
                 errorBorder="border-opacity-0 w-full"
                 defaultValue={user.phone_number}
+                onChange={(e) => {
+                  user1.phone_number = +e.target.value;
+                }}
               />
             </div>
             <div className="md:w-1/2">
-            <label htmlFor="alternatePhone" className="text-gray-400 text-base">
-                Alternate Phone
+              <label
+                htmlFor="alternatePhone"
+                className="text-gray-400 text-base"
+              >
+                Alternate Phone (unchangeable)
               </label>
               <Input
                 type="phone"
@@ -139,13 +167,14 @@ const Profile: FC<Props> = () => {
                 error=""
                 errorBorder="border-opacity-0 w-full"
                 defaultValue={user.alternate_phone_number}
+                readOnly
               />
             </div>
           </div>
           <div className="w-full flex flex-col md:flex-row">
             <div className="md:w-1/2 md:mr-7">
-            <label htmlFor="home" className="text-gray-400 text-base">
-                HomeTown
+              <label htmlFor="home" className="text-gray-400 text-base">
+                HomeTown (unchangeable)
               </label>
               <Input
                 type="text"
@@ -156,11 +185,12 @@ const Profile: FC<Props> = () => {
                 error=""
                 errorBorder="border-opacity-0 w-full"
                 defaultValue={user.hometown}
+                readOnly
               />
             </div>
             <div className="md:w-1/2">
-            <label htmlFor="code" className="text-gray-400 text-base">
-                State Code
+              <label htmlFor="code" className="text-gray-400 text-base">
+                State Code (unchangeable)
               </label>
               <Input
                 type="text"
@@ -171,12 +201,18 @@ const Profile: FC<Props> = () => {
                 error=""
                 errorBorder="border-opacity-0 w-full"
                 defaultValue={user.state_code}
+                readOnly
               />
             </div>
           </div>
         </div>
       </div>
-      <div className={"fixed ease-linear duration-1000 bottom-0 left-4 right-4 h-16 px-4 p-3 rounded-t-md bg-gray-900 flex justify-between " + (toggle.isSidebarOpen && "md:left-64")}>
+      <div
+        className={
+          "fixed ease-linear duration-1000 bottom-0 left-4 right-4 h-16 px-4 p-3 rounded-t-md bg-gray-900 flex justify-between " +
+          (toggle.isSidebarOpen && "md:left-64")
+        }
+      >
         <Button
           children="Reset All"
           className="px-4 h-full"
@@ -187,9 +223,15 @@ const Profile: FC<Props> = () => {
           theme="success"
           className=" bg-green-600 h-full px-4"
           onClick={() => {
-            meChange({ last_name: "bansal" }).then((response) =>
-              console.log(response)
-            );
+            meChange({
+              first_name: user1.first_name,
+              middle_name: user1.middle_name,
+              last_name: user1.last_name,
+              email: user1.email,
+              phone_number: user1.phone_number,
+            }).then((response) => {
+              authAction.login(response.data);
+            });
           }}
         />
       </div>

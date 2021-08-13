@@ -1,6 +1,5 @@
 import axios, { CancelTokenSource } from "axios";
 import { Group } from "../models/Group";
-import { LS_LOGIN_TOKEN } from "./Auth";
 import { BASE_URL, get } from "./base";
 
 export interface GroupRequest {
@@ -19,12 +18,10 @@ export const fetchGroups = (
   tokenSource?: CancelTokenSource
 ) => {
   const url = BASE_URL + "/groups";
-  const token = localStorage.getItem(LS_LOGIN_TOKEN);
 
   return get<GroupResponse>(url, {
     params: data,
     cancelToken: tokenSource?.token,
-    headers: { Authorization: token },
   });
 };
 
@@ -34,9 +31,8 @@ export interface SelectedGroupResponse {
 
 export const fetchGroup = (selected: number) => {
   const url = BASE_URL + "/groups/" + selected;
-  const token = localStorage.getItem(LS_LOGIN_TOKEN);
   return axios
-    .get<SelectedGroupResponse>(url, { headers: { Authorization: token } })
+    .get<SelectedGroupResponse>(url)
     .then((response) => {
       return response.data.data;
     });

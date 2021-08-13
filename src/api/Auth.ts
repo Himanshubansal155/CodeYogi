@@ -39,18 +39,20 @@ export const me = () => {
 };
 
 interface MeChangeResponse {
+  id?: number;
   first_name?: string;
   middle_name?: string;
   last_name?: string;
-  email?: string;
   profile_pic_url?: string;
+  email?: string;
+  bio?: string;
+  phone_number?: number;
+  alternate_phone_number?: number;
+  state_code?: number;
+  hometown?: string;
 }
 
 export const meChange = (data: MeChangeResponse) => {
-  const token = localStorage.getItem(LS_LOGIN_TOKEN);
   const url = BASE_URL + "/me";
-  return axios.put(url, {
-    body: data,
-    headers: { Authorization: token, "content-type": "application/json" },
-  }).then((response) => response.data);
+  return axios.put(url, data).then((response) => response.data);
 };
