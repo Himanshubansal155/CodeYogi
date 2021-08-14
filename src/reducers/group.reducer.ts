@@ -1,28 +1,31 @@
 import { Reducer } from "redux";
 import {
   GROUP_FETCH_COMPLETED,
+  GROUP_FETCH_ERROR,
   GROUP_FETCH_ONE,
   GROUP_QUERY_CHANGED,
   GROUP_QUERY_COMPLETED,
 } from "../actions/actions.constants";
-import { addMany, EntityState, getIds } from "../models/Entity";
+import {
+  addMany,
+  addOne,
+  EntityState,
+  getIds,
+  initialEntityState,
+  select,
+  setErrorForOne,
+} from "../models/Entity";
 import { Group } from "../models/Group";
 
 export interface GroupState extends EntityState<Group> {
   query: string;
   queryMap: { [query: string]: number[] };
-  loadingQuery: { [query: string]: boolean };
-  loading: boolean;
-  group?: Group;
-  selectedId?: number;
 }
 
 const initialState = {
-  byId: {},
+  ...initialEntityState,
   query: "",
   queryMap: {},
-  loadingQuery: {},
-  loading: false,
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -34,8 +37,7 @@ export const groupReducer: Reducer<GroupState> = (
       return {
         ...state,
         query: action.payload,
-        loadingQuery: { [action.payload]: true },
-        loading: true,
+        loadingList: true,
       };
     case GROUP_QUERY_COMPLETED:
       const groupIds = getIds(action.payload.groups);
@@ -43,16 +45,16 @@ export const groupReducer: Reducer<GroupState> = (
       return {
         ...newState,
         queryMap: { ...state.queryMap, [action.payload.query]: groupIds },
-        loadingQuery: {
-          ...newState.loadingQuery,
-          [action.payload.query]: false,
-        },
-        loading: false,
+        loadingList: false,
       };
     case GROUP_FETCH_ONE:
-      return { ...state, selectedId: action.payload };
+      return select(state, action.payload) as GroupState;
     case GROUP_FETCH_COMPLETED:
-      return { ...state, group: action.payload };
+      return { ...(addOne(state, action.payload, false) as GroupState) };
+    case GROUP_FETCH_ERROR:
+      const { id, message } = action.payload;
+
+      return setErrorForOne(state, id, message) as GroupState;
     default:
       return state;
   }

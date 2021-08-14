@@ -50,7 +50,7 @@ const Sidebar: FC<Props> = (props) => {
             StartIcon={icons.FiBox}
             EndIcon={icons.FiChevronRight}
             children="Users"
-            onClick={() => history.push("/recordings")}
+            onClick={() => history.push("/users")}
           />
           <SideBarComponent
             StartIcon={icons.FiZap}

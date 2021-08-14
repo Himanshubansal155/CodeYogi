@@ -11,12 +11,11 @@ import {
   userSelector,
 } from "../../selectors/users.selectors";
 import { useAppSelector } from "../../store";
-import profile from "../../images/profile-12.jpeg";
 import { useHistory } from "react-router-dom";
 
 interface Props {}
 
-const Recordings: FC<Props> = () => {
+const Users: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
   const dispatch = useDispatch();
   const users = useAppSelector(userSelector);
@@ -40,7 +39,7 @@ const Recordings: FC<Props> = () => {
           {users &&
             users.map((user) => (
               <div
-                className="w-96 mx-auto bg-white flex items-center p-4"
+                className="w-96 mx-auto bg-white flex items-center p-4 cursor-pointer"
                 key={user.id + ""}
                 onClick={() => {
                   history.push("/user/" + user.id);
@@ -51,7 +50,7 @@ const Recordings: FC<Props> = () => {
                     className="h-full w-full rounded-full"
                     src={user.profile_pic_url}
                     onError={(e) => {
-                      e.currentTarget.src = profile;
+                      e.currentTarget.src = ("https://picsum.photos/200/300?random="+ user.id);
                     }}
                     alt=""
                   />
@@ -65,7 +64,7 @@ const Recordings: FC<Props> = () => {
                   </div>
                 </div>
               </div>
-            ))}{" "}
+            ))}
           {!loading && users.length === 0 && (
             <div className="text-center text-gray-500">
               <HiCubeTransparent className="text-4xl mx-auto" />
@@ -78,6 +77,6 @@ const Recordings: FC<Props> = () => {
   );
 };
 
-Recordings.defaultProps = {};
+Users.defaultProps = {};
 
-export default memo(Recordings);
+export default memo(Users);

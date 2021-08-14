@@ -39,7 +39,7 @@ function App() {
             <Route
               path={[
                 "/dashboard",
-                "/recordings",
+                "/users",
                 "/profile",
                 "/groups",
                 "/group/:groupId",

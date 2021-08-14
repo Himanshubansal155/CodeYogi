@@ -3,11 +3,12 @@ import { call, put, takeLatest, all } from "redux-saga/effects";
 import { USER_FETCH_ONE, USER_QUERY } from "../actions/actions.constants";
 import {
   userFetchCompleted,
+  userFetchError,
   userQueryCompleted,
 } from "../actions/user.actions";
 import {
   fetchUsers as fetchUsersAPI,
-  fetchUser as fetchGroupAPI,
+  fetchUser as fetchUserAPI,
 } from "../api/Users";
 
 export function* fetchUsers(): Generator<any> {
@@ -23,6 +24,13 @@ export function* watchUserQueryChanged() {
 }
 
 export function* fetchUser(action: AnyAction): Generator<any> {
-  const groupResponseData: any = yield call(fetchGroupAPI, action.payload);
-  yield put(userFetchCompleted(groupResponseData));
+  
+
+  try {
+    const userResponseData: any = yield call(fetchUserAPI, action.payload);
+  yield put(userFetchCompleted(userResponseData));
+  } catch (e) {
+    const error = e.response.data?.message || "Some error Occured";
+    yield put(userFetchError(action.payload, error));
+  }
 }

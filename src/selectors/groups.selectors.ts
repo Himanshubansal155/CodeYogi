@@ -18,11 +18,6 @@ export const groupQueryByIdSelector = createSelector(
   (state) => state.byId
 );
 
-export const groupFetchedSelector = createSelector(
-  [groupStateSelector],
-  (state) => state.group
-);
-
 export const groupSelector = createSelector(
   [groupQuerySelector, groupQueryMapSelector, groupQueryByIdSelector],
   (query, queryMap, byId) => {
@@ -31,17 +26,27 @@ export const groupSelector = createSelector(
     return groups;
   }
 );
-export const groupQueryLoadingSelector = createSelector(
-  [groupStateSelector],
-  (state) => state.loadingQuery
-);
-
 export const groupLoadingSelector = createSelector(
-  [groupQuerySelector, groupQueryLoadingSelector],
-  (query, loadingMap) => loadingMap[query]
+  [groupStateSelector],
+  (groupState) => groupState.loadingList
 );
 
-export const groupLoadingStateSelector = createSelector(
+export const groupLoadingOneSelector = createSelector(
   [groupStateSelector],
-  (groupState) => groupState.loading
+  (state) => state.loadingOne
+);
+
+export const groupSelectedIdSelector = createSelector(
+  [groupStateSelector],
+  (state) => state.selectedId
+);
+
+export const selectedGroupSelector = createSelector(
+  [groupQueryByIdSelector, groupSelectedIdSelector],
+  (byId, id) => id === undefined ? undefined : byId[id]
+);
+
+export const groupSelectedErrorSelector = createSelector(
+  [groupStateSelector],
+  (state) => state.errorOne
 );

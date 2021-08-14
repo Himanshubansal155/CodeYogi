@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar";
 import Profile from "./Profile";
 import DashboardPage from "./Dashboard.page";
-import RecordingsPage from "./Recordings.page";
+import UsersPage from "./Users.page";
 import Groups from "./Groups.page";
 import GroupPage from "./Group.page";
 import UserPage from "./User.page";
@@ -21,9 +21,9 @@ const Home: FC<Props> = (props) => {
           <Header pageName="Dashboard" componentName="Sales" />
           <DashboardPage />
         </Route>
-        <Route path="/recordings">
+        <Route path="/users">
           <Header pageName="User" componentName="Users" />
-          <RecordingsPage />
+          <UsersPage />
         </Route>
         <Route path="/profile">
           <Header pageName="User" componentName="Profile" />

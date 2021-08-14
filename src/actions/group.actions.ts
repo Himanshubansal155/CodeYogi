@@ -4,6 +4,7 @@ import {
   GROUP_FETCH_COMPLETED,
   GROUP_QUERY_CHANGED,
   GROUP_QUERY_COMPLETED,
+  GROUP_FETCH_ERROR,
 } from "./actions.constants";
 
 export const groupChangedAction = (query: string) => ({
@@ -23,4 +24,9 @@ export const groupFetchCompleted = (group: Group) => ({
 export const groupFetchOne = (selectedId: number) => ({
   type: GROUP_FETCH_ONE,
   payload: selectedId,
+});
+
+export const groupFetchError = (id: number, message: string) => ({
+  type: GROUP_FETCH_ERROR,
+  payload: { id, message },
 });

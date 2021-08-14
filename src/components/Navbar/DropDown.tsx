@@ -40,27 +40,30 @@ const DropDown: FC<Props> = ({ open: isOpen, onClose: setIsOpen }) => {
         >
           <div className="fixed top-12 bg-white p-3 rounded shadow-md right-5 z-50 text-gray-500 text-left">
             <Button
-              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600"
+              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600 w-36 text-left"
               onClick={() => history.push("/profile")}
             >
               <FiUser className="inline-block mr-2" /> Profile
             </Button>
             <hr></hr>
             <Button
-              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600"
+              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600 w-36 text-left"
               onClick={() => history.push("/groups")}
             >
               <FiInbox className="inline-block mr-2" />
               Groups
             </Button>
             <hr></hr>
-            <Button className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600">
+            <Button
+              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600 w-36 text-left"
+              onClick={() => history.push("/users")}
+            >
               <FiLock className="inline-block mr-2" />
-              Lock Screen
+              Users
             </Button>
             <hr />
             <Button
-              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600"
+              className="bg-opacity-0 hover:text-blue-500 px-2 p-2 shadow-none text-gray-600 w-36 text-left"
               onClick={() => {
                 logout();
                 window.location.href = "/login";

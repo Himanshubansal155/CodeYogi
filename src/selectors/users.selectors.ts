@@ -12,7 +12,7 @@ export const userIdsSelector = createSelector([userStateSelector], state => stat
 
 export const userLoadingStateSelector = createSelector(
   [userStateSelector],
-  (userState) => userState.loading
+  (userState) => userState.loadingList
 );
 
 export const userSelector = createSelector(
@@ -26,4 +26,25 @@ export const userSelector = createSelector(
 export const userFetchedSelector = createSelector(
   [userStateSelector],
   (state) => state.user
+);
+
+
+export const userSelectedIdSelector = createSelector(
+  [userStateSelector],
+  (state) => state.selectedId
+);
+
+export const selectedUserSelector = createSelector(
+  [userByIdSelector, userSelectedIdSelector],
+  (byId, id) => id && byId[id]
+);
+
+export const userSelectedErrorSelector = createSelector(
+  [userStateSelector],
+  (state) => state.errorOne
+);
+
+export const userLoadingOneSelector = createSelector(
+  [userStateSelector],
+  (state) => state.loadingOne
 );

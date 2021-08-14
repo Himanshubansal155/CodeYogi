@@ -23,9 +23,9 @@ const Groups: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
   const loading = useAppSelector(groupLoadingSelector);
   const dispatch = useDispatch();
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(groupChangedAction(""));
-  }, []);//eslint-disable-line
+  }, []); //eslint-disable-line
   return (
     <HomeLayout toggle={toggle.isSidebarOpen} className="text-center">
       <>
@@ -51,7 +51,7 @@ const Groups: FC<Props> = () => {
           {groups &&
             groups.map((group) => (
               <div
-                className="w-96 mx-auto bg-white flex items-center p-4"
+                className="w-96 mx-auto bg-white flex items-center p-4 cursor-pointer"
                 key={group.id + ""}
                 onClick={() => {
                   history.push("/group/" + group.id);
@@ -60,9 +60,10 @@ const Groups: FC<Props> = () => {
                 <div className="flex-shrink-0 h-16 w-16">
                   <img
                     className="h-full w-full rounded-full"
-                    src={group.group_image_url}
+                    src={group.group_image_url === null ? ("https://picsum.photos/200/300?random=" + group.id) : group.group_image_url}
                     onError={(e) => {
-                      e.currentTarget.src = "https://source.unsplash.com/user/erondu/480x480";
+                      e.currentTarget.src =
+                        ("https://picsum.photos/200/300?random="+ group.id);
                     }}
                     alt=""
                   />
@@ -78,7 +79,7 @@ const Groups: FC<Props> = () => {
               </div>
             ))}{" "}
           {!loading && groups.length === 0 && (
-            <div className="text-center text-gray-500">
+            <div className="text-center text-gray-500 bg-white">
               <HiCubeTransparent className="text-4xl mx-auto" />
               !!!No data Found!!!
             </div>
