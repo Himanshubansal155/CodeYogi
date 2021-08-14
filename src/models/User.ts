@@ -10,5 +10,5 @@ export interface User {
   alternate_phone_number: number;
   state_code: number;
   hometown: string;
-  updated_at:string;
+  updated_at: string;
 }

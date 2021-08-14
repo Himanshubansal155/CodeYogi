@@ -24,11 +24,9 @@ export function* watchUserQueryChanged() {
 }
 
 export function* fetchUser(action: AnyAction): Generator<any> {
-  
-
   try {
     const userResponseData: any = yield call(fetchUserAPI, action.payload);
-  yield put(userFetchCompleted(userResponseData));
+    yield put(userFetchCompleted(userResponseData));
   } catch (e) {
     const error = e.response.data?.message || "Some error Occured";
     yield put(userFetchError(action.payload, error));

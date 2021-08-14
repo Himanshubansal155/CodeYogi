@@ -9,9 +9,7 @@ const Dashboard: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
   return (
     <HomeLayout toggle={toggle.isSidebarOpen}>
-      <div className="">
-        This is Dashboard Page
-      </div>
+      <div className="">This is Dashboard Page</div>
     </HomeLayout>
   );
 };

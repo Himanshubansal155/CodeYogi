@@ -4,10 +4,6 @@ import { watchUserQueryChanged } from "./users.saga";
 import { watchGroupQueryChanged } from "./groups.saga";
 export const sagaMiddleware = createSagaMiddleware();
 
-
 export default function* rootSaga() {
-    yield all([
-        watchUserQueryChanged(),
-        watchGroupQueryChanged()
-    ])
+  yield all([watchUserQueryChanged(), watchGroupQueryChanged()]);
 }

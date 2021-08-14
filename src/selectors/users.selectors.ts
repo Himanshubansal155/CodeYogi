@@ -8,7 +8,10 @@ export const userByIdSelector = createSelector(
   (state) => state.byId
 );
 
-export const userIdsSelector = createSelector([userStateSelector], state => state.userIds);
+export const userIdsSelector = createSelector(
+  [userStateSelector],
+  (state) => state.userIds
+);
 
 export const userLoadingStateSelector = createSelector(
   [userStateSelector],
@@ -27,7 +30,6 @@ export const userFetchedSelector = createSelector(
   [userStateSelector],
   (state) => state.user
 );
-
 
 export const userSelectedIdSelector = createSelector(
   [userStateSelector],

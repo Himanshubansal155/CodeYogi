@@ -4,21 +4,20 @@ import AuthLogo from "../../components/AuthLogo";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 
-interface Props {
-}
+interface Props {}
 
 const Authentication: FC<Props> = (props) => {
   return (
     <div className="flex flex-row justify-between bg-white">
       <Switch>
         <Route path="/login">
-          <LoginPage/>
+          <LoginPage />
         </Route>
         <Route path="/signup">
           <SignupPage />
         </Route>
       </Switch>
-      <AuthLogo className="hidden md:block"/>
+      <AuthLogo className="hidden md:block" />
     </div>
   );
 };

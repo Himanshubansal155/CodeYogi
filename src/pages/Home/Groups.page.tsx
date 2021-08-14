@@ -60,10 +60,14 @@ const Groups: FC<Props> = () => {
                 <div className="flex-shrink-0 h-16 w-16">
                   <img
                     className="h-full w-full rounded-full"
-                    src={group.group_image_url === null ? ("https://picsum.photos/200/300?random=" + group.id) : group.group_image_url}
+                    src={
+                      group.group_image_url === null
+                        ? "https://picsum.photos/200/300?random=" + group.id
+                        : group.group_image_url
+                    }
                     onError={(e) => {
                       e.currentTarget.src =
-                        ("https://picsum.photos/200/300?random="+ group.id);
+                        "https://picsum.photos/200/300?random=" + group.id;
                     }}
                     alt=""
                   />

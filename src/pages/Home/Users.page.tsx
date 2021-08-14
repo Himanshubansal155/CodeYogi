@@ -33,7 +33,7 @@ const Users: FC<Props> = () => {
           {loading && <FaSpinner className="h-5 w-5 animate-spin mx-auto" />}
         </div>
         <div className="w-96 divide-y divide-gray-200 text-left mt-10 mx-auto table-auto rounded-t-md">
-          <h1 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100">
+          <h1 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100 rounded-t-md">
             Users
           </h1>
           {users &&
@@ -50,7 +50,8 @@ const Users: FC<Props> = () => {
                     className="h-full w-full rounded-full"
                     src={user.profile_pic_url}
                     onError={(e) => {
-                      e.currentTarget.src = ("https://picsum.photos/200/300?random="+ user.id);
+                      e.currentTarget.src =
+                        "https://picsum.photos/200/300?random=" + user.id;
                     }}
                     alt=""
                   />
@@ -71,6 +72,7 @@ const Users: FC<Props> = () => {
               !!!No data Found!!!
             </div>
           )}
+          <div className="w-full h-5 bg-gray-100 rounded-b-md"></div>
         </div>
       </>
     </HomeLayout>

@@ -1,12 +1,12 @@
-import {FC, memo} from "react";
+import { FC, memo } from "react";
 
 interface Props {}
 
 const NotFound: FC<Props> = () => {
   return (
     <div className="text-center font-bold font-2xl mt-28">
-        Wrong URL<br></br>
-        Page Not Found
+      Wrong URL<br></br>
+      Page Not Found
     </div>
   );
 };

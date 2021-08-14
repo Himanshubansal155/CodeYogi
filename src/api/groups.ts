@@ -31,9 +31,7 @@ export interface SelectedGroupResponse {
 
 export const fetchGroup = (selected: number) => {
   const url = BASE_URL + "/groups/" + selected;
-  return axios
-    .get<SelectedGroupResponse>(url)
-    .then((response) => {
-      return response.data.data;
-    });
+  return axios.get<SelectedGroupResponse>(url).then((response) => {
+    return response.data.data;
+  });
 };

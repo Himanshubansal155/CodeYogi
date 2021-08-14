@@ -21,7 +21,7 @@ const Group: FC<Props> = () => {
   const group = useAppSelector(selectedGroupSelector);
   const error = useAppSelector(groupSelectedErrorSelector);
   const loading = useAppSelector(groupLoadingOneSelector);
-  
+
   useEffect(() => {
     dispatch(groupFetchOne(groupId));
   }, [groupId]); //eslint-disable-line
@@ -31,16 +31,22 @@ const Group: FC<Props> = () => {
         <h1 className="text-center mb-5">Group Page</h1>
 
         <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-28">
-          {error && <div className="text-center text-white w-full">{error}</div>}
+          {error && (
+            <div className="text-center text-white w-full">{error}</div>
+          )}
           {group && (
             <>
               <div className="flex-shrink-0 h-full w-28">
                 <img
                   className="h-full w-full rounded-l-md"
-                  src={group.group_image_url === null ? ("https://picsum.photos/200/300?random=" + group.id) : group.group_image_url}
+                  src={
+                    group.group_image_url === null
+                      ? "https://picsum.photos/200/300?random=" + group.id
+                      : group.group_image_url
+                  }
                   onError={(e) => {
                     e.currentTarget.src =
-                    ("https://picsum.photos/200/300?random="+ group.id);
+                      "https://picsum.photos/200/300?random=" + group.id;
                   }}
                   alt=""
                 />

@@ -43,7 +43,7 @@ const User: FC<Props> = () => {
                 src={user.profile_pic_url}
                 onError={(e) => {
                   e.currentTarget.src =
-                  ("https://picsum.photos/200/300?random="+ user.id);
+                    "https://picsum.photos/200/300?random=" + user.id;
                 }}
                 alt=""
               />
@@ -71,7 +71,7 @@ const User: FC<Props> = () => {
         </div>
         <div>
           <div className="flex w-72 h-10 bg-gray-600 mx-auto mt-10 rounded-full justify-between">
-          <Link
+            <Link
               to={"/user/" + (userId - 1)}
               className=" h-full p-1 bg-blue-600 rounded-l-full bg-opacity-25 px-5 text-white items-center flex"
             >

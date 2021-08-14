@@ -103,7 +103,7 @@ const Signup: FC<Props> = () => {
                 <input
                   type="checkbox"
                   className="text-blue-400 border-2 w-4 h-4"
-                  onClick={()=>setIsChecked((open)=>!open)}
+                  onClick={() => setIsChecked((open) => !open)}
                 />
                 <span className="px-1"></span>I agree to the{" "}
                 <span className="text-blue-400">terms and conditions</span>
@@ -136,7 +136,11 @@ const Signup: FC<Props> = () => {
                 type="submit"
                 className={
                   "px-5 opacity-50 " +
-                  (!touched.email || errors.email || errors.password || errors.phoneNumber || !isChecked
+                  (!touched.email ||
+                  errors.email ||
+                  errors.password ||
+                  errors.phoneNumber ||
+                  !isChecked
                     ? " cursor-not-allowed"
                     : "opacity-100")
                 }

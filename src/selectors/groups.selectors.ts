@@ -43,7 +43,7 @@ export const groupSelectedIdSelector = createSelector(
 
 export const selectedGroupSelector = createSelector(
   [groupQueryByIdSelector, groupSelectedIdSelector],
-  (byId, id) => id === undefined ? undefined : byId[id]
+  (byId, id) => (id === undefined ? undefined : byId[id])
 );
 
 export const groupSelectedErrorSelector = createSelector(

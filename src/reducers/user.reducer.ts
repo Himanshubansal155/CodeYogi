@@ -8,7 +8,15 @@ import {
   USER_QUERY,
   USER_QUERY_COMPLETED,
 } from "../actions/actions.constants";
-import { addMany, addOne, EntityState, getIds, initialEntityState, select, setErrorForOne } from "../models/Entity";
+import {
+  addMany,
+  addOne,
+  EntityState,
+  getIds,
+  initialEntityState,
+  select,
+  setErrorForOne,
+} from "../models/Entity";
 import { User } from "../models/User";
 
 export interface UserState extends EntityState<User> {
@@ -42,13 +50,13 @@ export const userReducer: Reducer<UserState> = (
 
     case USER_FETCH_ONE:
       return select(state, action.payload) as UserState;
-    
-      case USER_FETCH_COMPLETED:
-        return {...addOne(state, action.payload, false) as UserState};
-      case USER_FETCH_ERROR:
-        const { id, message } = action.payload;
-        
-        return setErrorForOne(state, id, message) as UserState;
+
+    case USER_FETCH_COMPLETED:
+      return { ...(addOne(state, action.payload, false) as UserState) };
+    case USER_FETCH_ERROR:
+      const { id, message } = action.payload;
+
+      return setErrorForOne(state, id, message) as UserState;
     default:
       return state;
   }

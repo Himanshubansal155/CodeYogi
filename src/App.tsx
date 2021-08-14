@@ -19,7 +19,7 @@ function App() {
     if (!token) {
       return;
     }
-    me().then(u => authAction.fetch(u));
+    me().then((u) => authAction.fetch(u));
   }, []); // eslint-disable-line
 
   if (token && !user) {

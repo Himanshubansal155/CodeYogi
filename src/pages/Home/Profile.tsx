@@ -222,7 +222,10 @@ const Profile: FC<Props> = () => {
           className="px-4 h-full"
           onClick={() => {}}
         />
-        <FaSpinner className="w-5 animate-spin mx-auto text-white h-full hidden" id="spinner"/>
+        <FaSpinner
+          className="w-5 animate-spin mx-auto text-white h-full hidden"
+          id="spinner"
+        />
         <Button
           children="Save changes"
           theme="success"
