@@ -5,8 +5,7 @@ import { authReducer } from "./reducers/auth.reducer";
 import { groupReducer } from "./reducers/group.reducer";
 import { sidebarReducer } from "./reducers/sidebar.reducer";
 import { userReducer } from "./reducers/user.reducer";
-import { sagaMiddleware } from "./saga";
-import rootSaga from "./saga/groups.saga";
+import rootSaga, { sagaMiddleware } from "./saga";
 
 const reducer = combineReducers({
   users: userReducer,

@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { call, put, takeLatest, all } from "@redux-saga/core/effects";
-import { GROUP_FETCH, GROUP_QUERY_CHANGED } from "../actions/actions.constants";
+import { GROUP_FETCH_ONE, GROUP_QUERY_CHANGED } from "../actions/actions.constants";
 import {
   groupFetchCompleted,
   groupQueryCompleted,
@@ -19,19 +19,14 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
   yield put(groupQueryCompleted(action.payload, groupResponse.data.data));
 }
 
-function* watchGroupQueryChanged() {
-  yield takeLatest(GROUP_QUERY_CHANGED, fetchGroups);
+export function* watchGroupQueryChanged() {
+  yield all([
+    takeLatest(GROUP_QUERY_CHANGED, fetchGroups),
+    takeLatest(GROUP_FETCH_ONE, fetchGroup),
+  ]);
 }
 
 export function* fetchGroup(action: AnyAction): Generator<any> {
   const groupResponseData: any = yield call(fetchGroupAPI, action.payload);
   yield put(groupFetchCompleted(groupResponseData));
-}
-
-function* watchGroupFetchChanged() {
-  yield takeLatest(GROUP_FETCH, fetchGroup);
-}
-
-export default function* rootSaga() {
-  yield all([watchGroupQueryChanged(), watchGroupFetchChanged()]);
-}
+};

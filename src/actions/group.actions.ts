@@ -1,6 +1,6 @@
 import { Group } from "../models/Group";
 import {
-  GROUP_FETCH,
+  GROUP_FETCH_ONE,
   GROUP_FETCH_COMPLETED,
   GROUP_QUERY_CHANGED,
   GROUP_QUERY_COMPLETED,
@@ -20,7 +20,7 @@ export const groupFetchCompleted = (group: Group) => ({
   payload: group,
 });
 
-export const groupFetchedCompleted = (selectedId: number) => ({
-  type: GROUP_FETCH,
+export const groupFetchOne = (selectedId: number) => ({
+  type: GROUP_FETCH_ONE,
   payload: selectedId,
 });

@@ -49,7 +49,7 @@ const Sidebar: FC<Props> = (props) => {
           <SideBarComponent
             StartIcon={icons.FiBox}
             EndIcon={icons.FiChevronRight}
-            children="Components"
+            children="Users"
             onClick={() => history.push("/recordings")}
           />
           <SideBarComponent

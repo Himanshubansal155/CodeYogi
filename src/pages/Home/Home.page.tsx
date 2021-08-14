@@ -8,6 +8,7 @@ import DashboardPage from "./Dashboard.page";
 import RecordingsPage from "./Recordings.page";
 import Groups from "./Groups.page";
 import GroupPage from "./Group.page";
+import UserPage from "./User.page";
 interface Props {}
 
 const Home: FC<Props> = (props) => {
@@ -21,7 +22,7 @@ const Home: FC<Props> = (props) => {
           <DashboardPage />
         </Route>
         <Route path="/recordings">
-          <Header pageName="Dashboard" componentName="Recordings" />
+          <Header pageName="User" componentName="Users" />
           <RecordingsPage />
         </Route>
         <Route path="/profile">
@@ -35,6 +36,10 @@ const Home: FC<Props> = (props) => {
         <Route path="/group/:groupId">
           <Header pageName="Groups" componentName="Group" />
           <GroupPage />
+        </Route>
+        <Route path="/user/:userId">
+          <Header pageName="User" componentName="User" />
+          <UserPage />
         </Route>
       </Switch>
     </div>

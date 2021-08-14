@@ -1,4 +1,5 @@
 import { FC, memo } from "react";
+import { FaSpinner } from "react-icons/fa";
 import { authAction } from "../../actions/auth.actions";
 import { meChange } from "../../api/Auth";
 import Button from "../../components/Button/Button";
@@ -24,6 +25,9 @@ const Profile: FC<Props> = () => {
     >
       <div className="w-full min-h-0 rounded-lg shadow-sm bg-white p-5">
         <h1 className="uppercase text-lg">General Information</h1>
+        <p className="text-gray-400 text-sm">
+          Last Updated at: {user.updated_at}
+        </p>
         <div className="flex flex-col md:flex-row md:h-44 m-10">
           <div className="md:border-r-2 border-gray-100 md:h-full pr-10 py-2">
             <img
@@ -218,11 +222,13 @@ const Profile: FC<Props> = () => {
           className="px-4 h-full"
           onClick={() => {}}
         />
+        <FaSpinner className="w-5 animate-spin mx-auto text-white h-full hidden" id="spinner"/>
         <Button
           children="Save changes"
           theme="success"
           className=" bg-green-600 h-full px-4"
           onClick={() => {
+            document.getElementById("spinner")!.classList.remove("hidden");
             meChange({
               first_name: user1.first_name,
               middle_name: user1.middle_name,
@@ -230,6 +236,7 @@ const Profile: FC<Props> = () => {
               email: user1.email,
               phone_number: user1.phone_number,
             }).then((response) => {
+              document.getElementById("spinner")!.classList.add("hidden");
               authAction.login(response.data);
             });
           }}

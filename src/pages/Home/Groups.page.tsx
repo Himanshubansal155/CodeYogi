@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FC, memo } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { HiCubeTransparent } from "react-icons/hi";
@@ -22,6 +23,9 @@ const Groups: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
   const loading = useAppSelector(groupLoadingSelector);
   const dispatch = useDispatch();
+  useEffect(()=> {
+    dispatch(groupChangedAction(""));
+  }, []);//eslint-disable-line
   return (
     <HomeLayout toggle={toggle.isSidebarOpen} className="text-center">
       <>
@@ -41,7 +45,7 @@ const Groups: FC<Props> = () => {
           {loading && <FaSpinner className="h-5 w-5 animate-spin mx-auto" />}
         </div>
         <div className="w-96 divide-y divide-gray-200 text-left mt-10 mx-auto table-auto rounded-t-md">
-          <h1 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100">
+          <h1 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider bg-gray-100 rounded-t-md">
             Groups
           </h1>
           {groups &&
@@ -57,6 +61,9 @@ const Groups: FC<Props> = () => {
                   <img
                     className="h-full w-full rounded-full"
                     src={group.group_image_url}
+                    onError={(e) => {
+                      e.currentTarget.src = "https://source.unsplash.com/user/erondu/480x480";
+                    }}
                     alt=""
                   />
                 </div>
@@ -76,6 +83,7 @@ const Groups: FC<Props> = () => {
               !!!No data Found!!!
             </div>
           )}
+          <div className="w-full h-5 bg-gray-100 rounded-b-md"></div>
         </div>
       </>
     </HomeLayout>

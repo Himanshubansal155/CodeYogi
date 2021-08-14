@@ -43,6 +43,7 @@ function App() {
                 "/profile",
                 "/groups",
                 "/group/:groupId",
+                "/user/:userId",
               ]}
               exact
             >
