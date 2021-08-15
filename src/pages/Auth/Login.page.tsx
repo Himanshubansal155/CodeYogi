@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiUser, FiLock } from "react-icons/fi";
 import { FaSpinner, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { useState } from "react";
@@ -8,13 +8,20 @@ import { useFormik } from "formik";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import AuthFooter from "../../components/AuthFooter";
-import { login } from "../../api/Auth";
-import { authAction } from "../../actions/auth.actions";
+import { userLoginAction } from "../../actions/auth.actions";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../store";
+import { authErrorSelector } from "../../selectors/auth.selectors";
 
 interface Props {}
 
 const Login: FC<Props> = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const error = useAppSelector(authErrorSelector);
+  if(error){
+    console.log("erroro", error);
+    alert(error);
+  }
   const [passwordHidden, setPasswordHidden] = useState(true);
   const {
     handleSubmit,
@@ -31,13 +38,11 @@ const Login: FC<Props> = () => {
     }),
     onSubmit: (data) => {
       setSubmitting(true);
-      login(data).then((user) => {
-        authAction.login(user);
-        history.push("/dashboard");
-      });
+      dispatch(userLoginAction(data));
+      setSubmitting(false);
     },
   });
-
+  
   return (
     <div className="mx-auto font-nunito mt-5 md:mt-20 max-w-lg">
       <h1 className="text-4xl tracking-wider text-black font-medium mb-5">
@@ -108,7 +113,7 @@ const Login: FC<Props> = () => {
                 type="submit"
                 className={
                   "px-5 opacity-50 " +
-                  (!touched.email || errors.email || errors.password
+                  (!touched.email || !touched.password || errors.email || errors.password
                     ? "cursor-not-allowed "
                     : "opacity-100 cursor-pointer")
                 }

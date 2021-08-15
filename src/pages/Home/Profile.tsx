@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { authAction } from "../../actions/auth.actions";
+import { useDispatch } from "react-redux";
+import { userFetchCompleted } from "../../actions/user.actions";
 import { meChange } from "../../api/Auth";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
@@ -14,6 +15,7 @@ interface Props {}
 const Profile: FC<Props> = () => {
   let user = useAppSelector(meSelector);
   let user1: User = user;
+  const dispatch = useDispatch();
   const toggle = useAppSelector(SidebarSelector);
 
   return (
@@ -240,7 +242,8 @@ const Profile: FC<Props> = () => {
               phone_number: user1.phone_number,
             }).then((response) => {
               document.getElementById("spinner")!.classList.add("hidden");
-              authAction.login(response.data);
+              // authAction.login(response.data);
+              dispatch(userFetchCompleted(response));
             });
           }}
         />

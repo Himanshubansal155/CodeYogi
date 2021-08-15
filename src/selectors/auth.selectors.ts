@@ -9,6 +9,11 @@ export const authIdSelector = createSelector(
   (state) => state.id
 );
 
+export const authErrorSelector = createSelector(
+  [authStateSelector],
+  (state) => state.error
+);
+
 export const meSelector = createSelector(
   [userByIdSelector, authIdSelector],
   (byId, id) => byId[id!]

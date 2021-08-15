@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Suspense } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { authAction } from "./actions/auth.actions";
+import { meFetchAction } from "./actions/auth.actions";
 import { LS_LOGIN_TOKEN } from "./api/Auth";
-import { me } from "./api/Auth";
 import AuthenticationPageLazy from "./pages/Auth/Authentication.page.lazy";
 import HomePageLazy from "./pages/Home/Home.page.lazy";
 import NotFoundPage from "./pages/NotFound.page";
@@ -14,12 +14,13 @@ function App() {
   const token = localStorage.getItem(LS_LOGIN_TOKEN);
 
   const user = useAppSelector(meSelector);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) {
       return;
     }
-    me().then((u) => authAction.fetch(u));
+    dispatch(meFetchAction());
   }, []); // eslint-disable-line
 
   if (token && !user) {

@@ -1,5 +1,8 @@
 export const ME_FETCH = "me/fetch";
+export const ME_FETCH_COMPLETED = "me/fetch_completed";
 export const ME_LOGIN = "me/login";
+export const ME_LOGIN_COMPLETED = "me/login_completed";
+export const ME_LOGIN_ERROR = "me/login_error";
 
 export const GROUP_QUERY_CHANGED = "group/query_changed";
 export const GROUP_QUERY_COMPLETED = "group/results";

@@ -33,9 +33,10 @@ interface MeResponse {
   data: User;
 }
 
-export const me = () => {
+export const me = async () => {
   const url = BASE_URL + "/me";
-  return axios.get<MeResponse>(url).then((response) => response.data.data);
+  const response = await axios.get<MeResponse>(url);
+  return response.data.data;
 };
 
 interface MeChangeResponse {
