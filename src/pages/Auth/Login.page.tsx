@@ -30,6 +30,7 @@ const Login: FC<Props> = () => {
     setSubmitting,
     errors,
     getFieldProps,
+    isValid,
   } = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: yup.object().shape({
@@ -113,7 +114,7 @@ const Login: FC<Props> = () => {
                 type="submit"
                 className={
                   "px-5 opacity-50 " +
-                  (!touched.email || !touched.password || errors.email || errors.password
+                  (errors.email || errors.password || !isValid
                     ? "cursor-not-allowed "
                     : "opacity-100 cursor-pointer")
                 }
