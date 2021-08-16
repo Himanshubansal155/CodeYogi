@@ -28,7 +28,7 @@ const Users: FC<Props> = () => {
   return (
     <HomeLayout toggle={toggle.isSidebarOpen}>
       <>
-        <h1 className="text-center">This is Users page</h1>
+        <h1 className="text-center">Users</h1>
         <div className="h-5">
           {loading && <FaSpinner className="h-5 w-5 animate-spin mx-auto" />}
         </div>

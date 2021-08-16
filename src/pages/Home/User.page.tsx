@@ -24,17 +24,16 @@ const User: FC<Props> = () => {
   useEffect(() => {
     dispatch(userFetchOne(userId));
   }, [userId]); //eslint-disable-line
-  if (!user) {
-    return <div className="bg-red-600"> Loading...</div>;
-  }
   return (
     <HomeLayout toggle={toggle.isSidebarOpen}>
       <>
-        <h1 className="text-center mb-5">Group Page</h1>
+        <h1 className="text-center mb-5">User</h1>
 
         <div className="h-96 w-72 bg-gray-600 rounded-2xl text-gray-200 mx-auto">
           {error && (
-            <div className="text-center text-white w-full">{error}</div>
+            <div className="text-white w-full flex h-full items-center">
+              <p className="w-full text-center">{error}</p>
+            </div>
           )}
           {user && (
             <>

@@ -29,7 +29,7 @@ const Groups: FC<Props> = () => {
   return (
     <HomeLayout toggle={toggle.isSidebarOpen} className="text-center">
       <>
-        This is Groups Page
+        Groups
         <div className="mt-1 relative rounded-md shadow-sm w-64 mx-auto">
           <input
             type="text"
