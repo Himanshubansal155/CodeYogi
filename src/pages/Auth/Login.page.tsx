@@ -18,10 +18,6 @@ interface Props {}
 const Login: FC<Props> = () => {
   const dispatch = useDispatch();
   const error = useAppSelector(authErrorSelector);
-  if(error){
-    console.log("erroro", error);
-    alert(error);
-  }
   const [passwordHidden, setPasswordHidden] = useState(true);
   const {
     handleSubmit,
@@ -146,6 +142,10 @@ const Login: FC<Props> = () => {
           </div>
         </div>
       </form>
+
+      <div className="h-10 w-full text-red-700">{error && <div className="w-full bg-gray-300 text-center animate-pulse rounded-3xl">!!{error}!!</div>}</div>
+
+      
 
       <AuthFooter />
     </div>
