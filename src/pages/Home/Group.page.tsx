@@ -6,6 +6,7 @@ import { groupFetchOne } from "../../actions/group.actions";
 import HomeLayout from "../../components/HomeLayout";
 import {
   groupCreatorsSelector,
+  groupInvitedMembersSelector,
   groupLoadingOneSelector,
   groupParticipantsSelector,
   groupSelectedErrorSelector,
@@ -23,6 +24,7 @@ const Group: FC<Props> = () => {
   const group = useAppSelector(selectedGroupSelector);
   const groupCreator = useAppSelector(groupCreatorsSelector);
   const groupParticipants = useAppSelector(groupParticipantsSelector);
+  const groupinvitedMembers = useAppSelector(groupInvitedMembersSelector);
   const error = useAppSelector(groupSelectedErrorSelector);
   const loading = useAppSelector(groupLoadingOneSelector);
   useEffect(() => {
@@ -33,7 +35,7 @@ const Group: FC<Props> = () => {
       <>
         <h1 className="text-center mb-5">Group Page</h1>
 
-        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-32">
+        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-36">
           {error && (
             <div className="text-center text-white w-full">{error}</div>
           )}
@@ -72,6 +74,12 @@ const Group: FC<Props> = () => {
                   {groupParticipants[group.id] === undefined || groupParticipants[group.id].length === 0
                     ? "No Participants"
                     : groupParticipants[group.id].join(", ")}
+                </div>
+                <div className="text-sm text-gray-300">
+                  Id of InvitedMembers:{" "}
+                  {groupinvitedMembers[group.id] === undefined || groupinvitedMembers[group.id].length === 0
+                    ? "No Invitation"
+                    : groupinvitedMembers[group.id].join(", ")}
                 </div>
               </div>
             </>

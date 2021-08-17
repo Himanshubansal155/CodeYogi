@@ -60,3 +60,8 @@ export const groupParticipantsSelector = createSelector(
   [groupStateSelector],
   (state) => state.participants
 );
+
+export const groupInvitedMembersSelector = createSelector(
+  [groupStateSelector],
+  (state) => state.invitedMembers
+);

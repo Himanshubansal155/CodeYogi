@@ -22,6 +22,7 @@ export interface GroupState extends EntityState<Group> {
   queryMap: { [query: string]: number[] };
   creators: { [groupId: number]: number };
   participants: { [groupId: number]: number[] };
+  invitedMembers: { [groupId: number]: number[] }
 }
 
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   queryMap: {},
   creators: {},
   participants: {},
+  invitedMembers: {},
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -65,8 +67,12 @@ export const groupReducer: Reducer<GroupState> = (
         participants: {
           ...fetchOneState.participants,
           [action.payload.id]:
-            [action.payload.participants.length] &&
             getIds(action.payload.participants),
+        },
+        invitedMembers: {
+          ...fetchOneState.invitedMembers,
+          [action.payload.id]:
+            getIds(action.payload.invitedMembers),
         },
       };
     case GROUP_FETCH_ERROR:

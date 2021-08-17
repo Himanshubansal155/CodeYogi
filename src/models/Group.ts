@@ -7,4 +7,5 @@ export interface Group {
   id: number;
   creator: User;
   participants: User[];
+  invitedMembers: User[];
 }
