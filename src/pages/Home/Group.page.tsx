@@ -5,7 +5,9 @@ import { Link, useParams } from "react-router-dom";
 import { groupFetchOne } from "../../actions/group.actions";
 import HomeLayout from "../../components/HomeLayout";
 import {
+  groupCreatorsSelector,
   groupLoadingOneSelector,
+  groupParticipantsSelector,
   groupSelectedErrorSelector,
   selectedGroupSelector,
 } from "../../selectors/groups.selectors";
@@ -19,9 +21,10 @@ const Group: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
   const dispatch = useDispatch();
   const group = useAppSelector(selectedGroupSelector);
+  const groupCreator = useAppSelector(groupCreatorsSelector);
+  const groupParticipants = useAppSelector(groupParticipantsSelector);
   const error = useAppSelector(groupSelectedErrorSelector);
   const loading = useAppSelector(groupLoadingOneSelector);
-
   useEffect(() => {
     dispatch(groupFetchOne(groupId));
   }, [groupId]); //eslint-disable-line
@@ -30,7 +33,7 @@ const Group: FC<Props> = () => {
       <>
         <h1 className="text-center mb-5">Group Page</h1>
 
-        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-28">
+        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-32">
           {error && (
             <div className="text-center text-white w-full">{error}</div>
           )}
@@ -51,11 +54,25 @@ const Group: FC<Props> = () => {
                   alt=""
                 />
               </div>
-              <div className="ml-4 p-3">
+              <div className="ml-4 p-2">
                 <div className="text-sm font-medium text-gray-300">
-                  {group.name}
+                  Name: {group.name}
                 </div>
-                <div className="text-sm text-gray-300">{group.description}</div>
+                <div className="text-sm text-gray-300">
+                  Description: {group.description}
+                </div>
+                <div className="text-sm text-gray-300">
+                  Id of Creator:{" "}
+                  {groupCreator[group.id] === null
+                    ? "Creator Not Found"
+                    : groupCreator[group.id]}
+                </div>
+                <div className="text-sm text-gray-300">
+                  Id of Participants:{" "}
+                  {groupParticipants[group.id] === undefined || groupParticipants[group.id].length === 0
+                    ? "No Participants"
+                    : groupParticipants[group.id].join(", ")}
+                </div>
               </div>
             </>
           )}

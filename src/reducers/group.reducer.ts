@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import {
-  GROUP_FETCH_COMPLETED,
+  GROUP_FETCH_ONE_COMPLETE,
   GROUP_FETCH_ERROR,
   GROUP_FETCH_ONE,
   GROUP_QUERY_CHANGED,
@@ -20,12 +20,16 @@ import { Group } from "../models/Group";
 export interface GroupState extends EntityState<Group> {
   query: string;
   queryMap: { [query: string]: number[] };
+  creators: { [groupId: number]: number };
+  participants: { [groupId: number]: number[] };
 }
 
 const initialState = {
   ...initialEntityState,
   query: "",
   queryMap: {},
+  creators: {},
+  participants: {},
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -49,8 +53,22 @@ export const groupReducer: Reducer<GroupState> = (
       };
     case GROUP_FETCH_ONE:
       return select(state, action.payload) as GroupState;
-    case GROUP_FETCH_COMPLETED:
-      return { ...(addOne(state, action.payload, false) as GroupState) };
+    case GROUP_FETCH_ONE_COMPLETE:
+      const fetchOneState = addOne(state, action.payload, false) as GroupState;
+      return {
+        ...fetchOneState,
+        creators: {
+          ...fetchOneState.creators,
+          [action.payload.id]:
+            action.payload.creator && action.payload.creator.id,
+        },
+        participants: {
+          ...fetchOneState.participants,
+          [action.payload.id]:
+            [action.payload.participants.length] &&
+            getIds(action.payload.participants),
+        },
+      };
     case GROUP_FETCH_ERROR:
       const { id, message } = action.payload;
 

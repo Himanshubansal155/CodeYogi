@@ -1,7 +1,7 @@
 import { Group } from "../models/Group";
 import {
   GROUP_FETCH_ONE,
-  GROUP_FETCH_COMPLETED,
+  GROUP_FETCH_ONE_COMPLETE,
   GROUP_QUERY_CHANGED,
   GROUP_QUERY_COMPLETED,
   GROUP_FETCH_ERROR,
@@ -17,7 +17,7 @@ export const groupQueryCompleted = (query: string, groups: Group[]) => ({
 });
 
 export const groupFetchCompleted = (group: Group) => ({
-  type: GROUP_FETCH_COMPLETED,
+  type: GROUP_FETCH_ONE_COMPLETE,
   payload: group,
 });
 

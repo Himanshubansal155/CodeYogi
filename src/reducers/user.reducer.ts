@@ -2,7 +2,7 @@ import { Reducer } from "redux";
 import {
   ME_FETCH_COMPLETED,
   ME_LOGIN_COMPLETED,
-  USER_FETCH_COMPLETED,
+  USER_FETCH_ONE_COMPLETE,
   USER_FETCH_ERROR,
   USER_FETCH_ONE,
   USER_QUERY,
@@ -51,7 +51,7 @@ export const userReducer: Reducer<UserState> = (
     case USER_FETCH_ONE:
       return select(state, action.payload) as UserState;
 
-    case USER_FETCH_COMPLETED:
+    case USER_FETCH_ONE_COMPLETE:
       return { ...(addOne(state, action.payload, false) as UserState) };
     case USER_FETCH_ERROR:
       const { id, message } = action.payload;

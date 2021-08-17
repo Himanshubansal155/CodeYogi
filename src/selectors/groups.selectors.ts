@@ -50,3 +50,13 @@ export const groupSelectedErrorSelector = createSelector(
   [groupStateSelector],
   (state) => state.errorOne
 );
+
+export const groupCreatorsSelector = createSelector(
+  [groupStateSelector],
+  (state) => state.creators
+);
+
+export const groupParticipantsSelector = createSelector(
+  [groupStateSelector],
+  (state) => state.participants
+);
