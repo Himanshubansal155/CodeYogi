@@ -35,7 +35,7 @@ const Group: FC<Props> = () => {
       <>
         <h1 className="text-center mb-5">Group Page</h1>
 
-        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-36">
+        <div className="w-96 mx-auto bg-gray-600 flex items-center rounded-md h-40">
           {error && (
             <div className="text-center text-white w-full">{error}</div>
           )}
@@ -56,31 +56,31 @@ const Group: FC<Props> = () => {
                   alt=""
                 />
               </div>
-              <div className="ml-4 p-2">
-                <div className="text-sm font-medium text-gray-300">
+              <div className="ml-4 p-2 flex flex-col space-y-1">
+                <p className="text-sm font-medium text-gray-300">
                   Name: {group.name}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Description: {group.description}
-                </div>
-                <div className="text-sm text-gray-300">
+                </p>
+                <p className="text-sm text-gray-300">
+                  Desc.: {group.description.substr(0,60)}
+                </p>
+                <p className="text-sm text-gray-300">
                   Id of Creator:{" "}
                   {groupCreator[group.id] === null
                     ? "Creator Not Found"
                     : groupCreator[group.id]}
-                </div>
-                <div className="text-sm text-gray-300">
+                </p>
+                <p className="text-sm text-gray-300">
                   Id of Participants:{" "}
-                  {groupParticipants[group.id] === undefined || groupParticipants[group.id].length === 0
+                  {groupParticipants[group.id] && (groupParticipants[group.id].length === 0
                     ? "No Participants"
-                    : groupParticipants[group.id].join(", ")}
-                </div>
-                <div className="text-sm text-gray-300">
-                  Id of InvitedMembers:{" "}
-                  {groupinvitedMembers[group.id] === undefined || groupinvitedMembers[group.id].length === 0
+                    : groupParticipants[group.id].join(", "))}
+                </p>
+                <p className="text-sm text-gray-300">
+                  Id of Invited Members:{" "}
+                  {groupinvitedMembers[group.id] && (groupinvitedMembers[group.id].length === 0
                     ? "No Invitation"
-                    : groupinvitedMembers[group.id].join(", ")}
-                </div>
+                    : groupinvitedMembers[group.id].join(", "))}
+                </p>
               </div>
             </>
           )}
