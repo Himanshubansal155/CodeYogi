@@ -55,7 +55,7 @@ export const groupReducer: Reducer<GroupState> = (
       const group = action.payload;
       return {
         ...state,
-        byId: group,
+        byId: {...state.byId, ...group},
         loadingOne: false,
       };
     case GROUP_FETCH_ERROR:
