@@ -13,14 +13,18 @@ import {
   fetchGroup as fetchGroupAPI,
   fetchGroups as fetchGroupsAPI,
 } from "../api/groups";
+import { normalize } from "normalizr";
+import { groupSchema } from "../models/schema";
+import { userFetchCompleted, userQueryCompleted } from "../actions/user.actions";
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
   const groupResponse: any = yield call(fetchGroupsAPI, {
     query: action.payload,
     status: "all-groups",
   });
-
-  yield put(groupQueryCompleted(action.payload, groupResponse.data.data));
+  const normalizedData = normalize(groupResponse.data.data, [groupSchema]);
+  yield put(groupQueryCompleted(action.payload, normalizedData.entities.groups));
+  yield put(userQueryCompleted(normalizedData.entities.users));
 }
 
 export function* watchGroupQueryChanged() {
@@ -33,7 +37,10 @@ export function* watchGroupQueryChanged() {
 export function* fetchOneGroup(action: AnyAction): Generator<any> {
   try {
     const groupResponseData: any = yield call(fetchGroupAPI, action.payload);
-    yield put(groupFetchCompleted(groupResponseData));
+
+    const normalizedData = normalize(groupResponseData, groupSchema);
+    yield put(groupFetchCompleted(normalizedData.entities.groups));
+    yield put(userFetchCompleted(normalizedData.entities.users));
   } catch (e) {
     const error = e.response.data?.message || "Some error Occured";
     yield put(groupFetchError(action.payload, error));

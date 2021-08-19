@@ -1,4 +1,3 @@
-import { User } from "../models/User";
 import {
   USER_FETCH_ONE_COMPLETE,
   USER_FETCH_ERROR,
@@ -11,12 +10,12 @@ export const userChangedAction = () => ({
   type: USER_QUERY,
 });
 
-export const userQueryCompleted = (users: User[]) => ({
+export const userQueryCompleted = (users: any) => ({
   type: USER_QUERY_COMPLETED,
   payload: users,
 });
 
-export const userFetchCompleted = (user: User) => ({
+export const userFetchCompleted = (user: any) => ({
   type: USER_FETCH_ONE_COMPLETE,
   payload: user,
 });

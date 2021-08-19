@@ -9,10 +9,8 @@ import {
   USER_QUERY_COMPLETED,
 } from "../actions/actions.constants";
 import {
-  addMany,
   addOne,
   EntityState,
-  getIds,
   initialEntityState,
   select,
   setErrorForOne,
@@ -40,11 +38,13 @@ export const userReducer: Reducer<UserState> = (
     case USER_QUERY:
       return { ...state, loadingList: true };
     case USER_QUERY_COMPLETED:
-      const userIds = getIds(action.payload);
-      const newState = addMany(state, action.payload) as UserState;
+      const dataUsers = action.payload;
+      const toNumbers = (arr: any[]) => arr.map(Number);
+      let userIds = toNumbers(Object.keys(dataUsers));
       return {
-        ...newState,
+        ...state,
         userIds: userIds,
+        byId: { ...state.byId, ...dataUsers },
         loadingList: false,
       };
 
@@ -52,7 +52,12 @@ export const userReducer: Reducer<UserState> = (
       return select(state, action.payload) as UserState;
 
     case USER_FETCH_ONE_COMPLETE:
-      return { ...(addOne(state, action.payload, false) as UserState) };
+      const data = action.payload;
+      return {
+        ...state,
+        byId: {...state.byId, ...data},
+        loadingOne: false,
+      }
     case USER_FETCH_ERROR:
       const { id, message } = action.payload;
 

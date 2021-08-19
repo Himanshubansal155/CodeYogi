@@ -1,4 +1,3 @@
-import { Group } from "../models/Group";
 import {
   GROUP_FETCH_ONE,
   GROUP_FETCH_ONE_COMPLETE,
@@ -11,12 +10,12 @@ export const groupChangedAction = (query: string) => ({
   type: GROUP_QUERY_CHANGED,
   payload: query,
 });
-export const groupQueryCompleted = (query: string, groups: Group[]) => ({
+export const groupQueryCompleted = (query: string, groups: any) => ({
   type: GROUP_QUERY_COMPLETED,
   payload: { query, groups },
 });
 
-export const groupFetchCompleted = (group: Group) => ({
+export const groupFetchCompleted = (group: any) => ({
   type: GROUP_FETCH_ONE_COMPLETE,
   payload: group,
 });

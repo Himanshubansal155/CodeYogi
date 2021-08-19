@@ -49,39 +49,42 @@ const Groups: FC<Props> = () => {
             Groups
           </h1>
           {groups &&
-            groups.map((group) => (
-              <div
-                className="w-96 mx-auto bg-white flex items-center p-4 cursor-pointer"
-                key={group.id + ""}
-                onClick={() => {
-                  history.push("/group/" + group.id);
-                }}
-              >
-                <div className="flex-shrink-0 h-16 w-16">
-                  <img
-                    className="h-full w-full rounded-full"
-                    src={
-                      group.group_image_url === null
-                        ? "https://picsum.photos/200/300?random=" + group.id
-                        : group.group_image_url
-                    }
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://picsum.photos/200/300?random=" + group.id;
+            groups.map(
+              (group) =>
+                group && (
+                  <div
+                    className="w-96 mx-auto bg-white flex items-center p-4 cursor-pointer"
+                    key={group.id + ""}
+                    onClick={() => {
+                      history.push("/group/" + group.id);
                     }}
-                    alt=""
-                  />
-                </div>
-                <div className="ml-4">
-                  <div className="text-sm font-medium text-gray-900">
-                    {group.id} {group.name}
+                  >
+                    <div className="flex-shrink-0 h-16 w-16">
+                      <img
+                        className="h-full w-full rounded-full"
+                        src={
+                          group.group_image_url === null
+                            ? "https://picsum.photos/200/300?random=" + group.id
+                            : group.group_image_url
+                        }
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "https://picsum.photos/200/300?random=" + group.id;
+                        }}
+                        alt=""
+                      />
+                    </div>
+                    <div className="ml-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {group.id} {group.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {group.description}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-500">
-                    {group.description}
-                  </div>
-                </div>
-              </div>
-            ))}{" "}
+                )
+            )}{" "}
           {!loading && groups.length === 0 && (
             <div className="text-center text-gray-500 bg-white">
               <HiCubeTransparent className="text-4xl mx-auto" />

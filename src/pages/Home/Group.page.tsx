@@ -5,10 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { groupFetchOne } from "../../actions/group.actions";
 import HomeLayout from "../../components/HomeLayout";
 import {
-  groupCreatorsSelector,
-  groupInvitedMembersSelector,
   groupLoadingOneSelector,
-  groupParticipantsSelector,
   groupSelectedErrorSelector,
   selectedGroupSelector,
 } from "../../selectors/groups.selectors";
@@ -19,17 +16,14 @@ interface Props {}
 
 const Group: FC<Props> = () => {
   const groupId = +useParams<{ groupId: string }>().groupId;
-  const toggle = useAppSelector(SidebarSelector);
-  const dispatch = useDispatch();
-  const group = useAppSelector(selectedGroupSelector);
-  const groupCreator = useAppSelector(groupCreatorsSelector);
-  const groupParticipants = useAppSelector(groupParticipantsSelector);
-  const groupinvitedMembers = useAppSelector(groupInvitedMembersSelector);
-  const error = useAppSelector(groupSelectedErrorSelector);
-  const loading = useAppSelector(groupLoadingOneSelector);
   useEffect(() => {
     dispatch(groupFetchOne(groupId));
   }, [groupId]); //eslint-disable-line
+  const toggle = useAppSelector(SidebarSelector);
+  const dispatch = useDispatch();
+  const group = useAppSelector(selectedGroupSelector);
+  const error = useAppSelector(groupSelectedErrorSelector);
+  const loading = useAppSelector(groupLoadingOneSelector);
   return (
     <HomeLayout toggle={toggle.isSidebarOpen}>
       <>
@@ -65,21 +59,21 @@ const Group: FC<Props> = () => {
                 </p>
                 <p className="text-sm text-gray-300">
                   Id of Creator:{" "}
-                  {groupCreator[group.id] === null
+                  {group.creator === undefined
                     ? "Creator Not Found"
-                    : groupCreator[group.id]}
+                    : group.creator.id}
                 </p>
                 <p className="text-sm text-gray-300">
                   Id of Participants:{" "}
-                  {groupParticipants[group.id] && (groupParticipants[group.id].length === 0
+                  {group.participants && (group.participants.length === 0
                     ? "No Participants"
-                    : groupParticipants[group.id].join(", "))}
+                    : group.participants.map(group => group && group.id).join(", "))}
                 </p>
                 <p className="text-sm text-gray-300">
                   Id of Invited Members:{" "}
-                  {groupinvitedMembers[group.id] && (groupinvitedMembers[group.id].length === 0
+                  {group.invitedMembers && (group.invitedMembers.length === 0
                     ? "No Invitation"
-                    : groupinvitedMembers[group.id].join(", "))}
+                    : group.invitedMembers.map(group => group && group.id).sort().join(", "))}
                 </p>
               </div>
             </>

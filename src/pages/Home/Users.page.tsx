@@ -37,7 +37,7 @@ const Users: FC<Props> = () => {
             Users
           </h1>
           {users &&
-            users.map((user) => (
+            users.map((user) => ( user && 
               <div
                 className="w-96 mx-auto bg-white flex items-center p-4 cursor-pointer"
                 key={user.id + ""}

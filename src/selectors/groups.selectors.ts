@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 import { AppState } from "../store";
+import { userByIdSelector } from "./users.selectors";
 
 export const groupStateSelector = (state: AppState) => state.groups;
 
@@ -42,26 +43,24 @@ export const groupSelectedIdSelector = createSelector(
 );
 
 export const selectedGroupSelector = createSelector(
-  [groupQueryByIdSelector, groupSelectedIdSelector],
-  (byId, id) => (id === undefined ? undefined : byId[id])
+  [groupQueryByIdSelector, groupSelectedIdSelector, userByIdSelector],
+  (byId, id, userById) => {
+    if (!id) {
+      return undefined;
+    }
+    const group = byId[id];
+    if (group) {
+      const creator = userById[group.creator as any];
+      const participants = group.participants.map((participant: any) => userById[participant]);
+      const invitedMembers = group.invitedMembers.map((member:any) => userById[member]);
+      return {...group, creator, participants, invitedMembers};
+    }
+
+    return undefined;
+  }
 );
 
 export const groupSelectedErrorSelector = createSelector(
   [groupStateSelector],
   (state) => state.errorOne
-);
-
-export const groupCreatorsSelector = createSelector(
-  [groupStateSelector],
-  (state) => state.creators
-);
-
-export const groupParticipantsSelector = createSelector(
-  [groupStateSelector],
-  (state) => state.participants
-);
-
-export const groupInvitedMembersSelector = createSelector(
-  [groupStateSelector],
-  (state) => state.invitedMembers
 );

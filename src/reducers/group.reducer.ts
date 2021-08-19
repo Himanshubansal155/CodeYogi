@@ -7,10 +7,7 @@ import {
   GROUP_QUERY_COMPLETED,
 } from "../actions/actions.constants";
 import {
-  addMany,
-  addOne,
   EntityState,
-  getIds,
   initialEntityState,
   select,
   setErrorForOne,
@@ -20,9 +17,6 @@ import { Group } from "../models/Group";
 export interface GroupState extends EntityState<Group> {
   query: string;
   queryMap: { [query: string]: number[] };
-  creators: { [groupId: number]: number };
-  participants: { [groupId: number]: number[] };
-  invitedMembers: { [groupId: number]: number[] }
 }
 
 const initialState = {
@@ -46,34 +40,23 @@ export const groupReducer: Reducer<GroupState> = (
         loadingList: true,
       };
     case GROUP_QUERY_COMPLETED:
-      const groupIds = getIds(action.payload.groups);
-      const newState = addMany(state, action.payload.groups) as GroupState;
+      const groups = action.payload.groups;
+      const toNumbers = (arr: any[]) => arr.map(Number);
+      const groupIds = toNumbers(Object.keys(groups));
       return {
-        ...newState,
-        queryMap: { ...state.queryMap, [action.payload.query]: groupIds },
+        ...state,
+        byId: groups,
         loadingList: false,
+        queryMap: { ...state.queryMap, [action.payload.query]: groupIds },
       };
     case GROUP_FETCH_ONE:
       return select(state, action.payload) as GroupState;
     case GROUP_FETCH_ONE_COMPLETE:
-      const fetchOneState = addOne(state, action.payload, false) as GroupState;
+      const group = action.payload;
       return {
-        ...fetchOneState,
-        creators: {
-          ...fetchOneState.creators,
-          [action.payload.id]:
-            action.payload.creator && action.payload.creator.id,
-        },
-        participants: {
-          ...fetchOneState.participants,
-          [action.payload.id]:
-            getIds(action.payload.participants),
-        },
-        invitedMembers: {
-          ...fetchOneState.invitedMembers,
-          [action.payload.id]:
-            getIds(action.payload.invitedMembers),
-        },
+        ...state,
+        byId: group,
+        loadingOne: false,
       };
     case GROUP_FETCH_ERROR:
       const { id, message } = action.payload;
