@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { userFetchCompleted } from "../../actions/user.actions";
 import { meChange } from "../../api/Auth";
 import Button from "../../components/Button/Button";
+import HomeLayout from "../../components/HomeLayout";
 import Input from "../../components/Input/Input";
 import { User } from "../../models/User";
 import { meSelector } from "../../selectors/auth.selectors";
@@ -19,12 +20,8 @@ const Profile: FC<Props> = () => {
   const toggle = useAppSelector(SidebarSelector);
 
   return (
-    <div
-      className={
-        "pt-16 p-4 relative w-full mt-16 bg-blue-900 bg-opacity-10 ease-linear duration-1000 min-h-screen " +
-        (toggle.isSidebarOpen && " md:ml-60")
-      }
-    >
+    <HomeLayout toggle={toggle.isSidebarOpen}>
+      <>
       <div className="w-full min-h-0 rounded-lg shadow-sm bg-white p-5">
         <h1 className="uppercase text-lg">General Information</h1>
         <p className="text-gray-400 text-sm">
@@ -248,7 +245,8 @@ const Profile: FC<Props> = () => {
           }}
         />
       </div>
-    </div>
+      </>
+    </HomeLayout>
   );
 };
 
